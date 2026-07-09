@@ -1,0 +1,153 @@
+{
+  "manifest_version": "phase5a.handoff-manifest.v1",
+  "generated_at": "2026-06-27T00:00:00.000Z",
+  "output_mode": "draft",
+  "issue_ready": false,
+  "document": {
+    "project_name": "Unitas Business Park",
+    "document_ref": "PROJ-RA-UNITAS-REV04",
+    "revision": "Rev04",
+    "issue_date": "24 March 2026",
+    "date_stamp": {
+      "source": "omitted",
+      "value": null
+    }
+  },
+  "handoff": {
+    "recipients": ["[Client To Confirm]"],
+    "subject": "Safe Method Risk Register DRAFT handoff - PROJ-RA-UNITAS-REV04"
+  },
+  "output": {
+    "exists": true,
+    "expected_file_name": "proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "file_name": "proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "extension": "docx",
+    "relative_path": "outputs/phase5a/proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "absolute_path": "C:/workspace/outputs/phase5a/proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "bytes": 1234,
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "source_inputs": [
+    {
+      "role": "document_set",
+      "label": "Document set JSON",
+      "relative_path": "fixtures/golden/document-sets/unitas-document-set.json",
+      "absolute_path": "C:/workspace/fixtures/golden/document-sets/unitas-document-set.json",
+      "exists": true,
+      "bytes": 1234,
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "hashes": {
+    "document_set_canonical_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "schemas": [
+      {
+        "relative_path": "schemas/document-set.schema.json",
+        "absolute_path": "C:/workspace/schemas/document-set.schema.json",
+        "bytes": 1234,
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    ],
+    "rules": [
+      {
+        "relative_path": "rules/index.mjs",
+        "absolute_path": "C:/workspace/rules/index.mjs",
+        "bytes": 1234,
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      }
+    ],
+    "generator": {
+      "version": "phase4.generation.v1",
+      "prompt_version": "phase4.prompt-system.v1"
+    },
+    "renderer": {
+      "version": "phase5a.docx-renderer.v1"
+    }
+  },
+  "unresolved_markers": {
+    "total": 1,
+    "markers": [
+      {
+        "marker": "[Client To Confirm]",
+        "count": 1
+      }
+    ],
+    "locations": [
+      {
+        "marker": "[Client To Confirm]",
+        "json_path": "/project/whs_consultant",
+        "count": 1
+      }
+    ]
+  },
+  "validation": {
+    "status": "pass",
+    "schema_status": "pass",
+    "rule_status": "pass",
+    "verdict": {
+      "rating": "Benchmark Quality Confirmed"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "verifier_status": [
+    {
+      "id": "phase5a-docx-ooxml",
+      "name": "Phase 5A DOCX OOXML assertions",
+      "status": "pass",
+      "required": true,
+      "evidence": "assertPhase5aDocx pass"
+    }
+  ],
+  "phase_gate_status": [
+    {
+      "id": "phase-5a",
+      "name": "Phase 5A local gate",
+      "phase": "5A",
+      "status": "pass",
+      "required": true,
+      "evidence_path": "phase-gates/phase-5a.md"
+    }
+  ],
+  "skipped_checks": [
+    {
+      "id": "anthropic-api-smoke",
+      "name": "Anthropic API smoke",
+      "status": "skip",
+      "reason": "ANTHROPIC_API_KEY not set",
+      "required": false
+    }
+  ],
+  "credential_gated_checks": [
+    {
+      "id": "anthropic-api-smoke",
+      "name": "Anthropic API smoke",
+      "status": "skip",
+      "required": false,
+      "reason": "ANTHROPIC_API_KEY not set"
+    }
+  ],
+  "review": {
+    "state": "not_reviewed",
+    "reviewer_name": null,
+    "reviewer_role": null,
+    "reviewed_at": null,
+    "comments": null
+  },
+  "preflight": {
+    "status": "pass",
+    "issue_ready": false,
+    "checks": [
+      {
+        "id": "VALIDATION-PASS",
+        "status": "pass",
+        "message": "Document-set schema and deterministic validators must pass before output handoff."
+      },
+      {
+        "id": "DRAFT-MODE",
+        "status": "pass",
+        "message": "Draft handoff is not issue-ready and does not claim consultant sign-off."
+      }
+    ]
+  }
+}

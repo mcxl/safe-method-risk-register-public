@@ -1,0 +1,11 @@
+{
+  "description": "missing required document-set fields fail structural validation",
+  "schema": "document-set.schema.json",
+  "source": "../schema-valid/document-set-structural-valid.json",
+  "mutations": [
+    {
+      "op": "delete",
+      "path": ["project"]
+    }
+  ]
+}

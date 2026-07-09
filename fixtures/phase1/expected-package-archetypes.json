@@ -1,0 +1,25 @@
+{
+  "source": "Derived verification fixture from knowledge/hrcw_trigger_map.json package order; not an independent WHS source.",
+  "packages": [
+    "Site establishment",
+    "Bulk earthworks and excavation",
+    "Augered pier footings / bored concrete piers",
+    "Underground services installation",
+    "Concrete slabs on ground",
+    "Mezzanine offices and stairs",
+    "Tilt-up panel erection",
+    "Tilt-up temporary brace removal",
+    "Low retaining wall",
+    "Structural steel erection",
+    "Roofing and roof access",
+    "Metal stud framing and plasterboard",
+    "Electrical works / energised services",
+    "HVAC and mechanical installation",
+    "Solar panel installation",
+    "Hydraulic works",
+    "Kitchens",
+    "Waterproofing and tiling",
+    "Finishes — painting and upper-level work",
+    "External completion"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "benchmark-quality-confirmed",
+      "results": [],
+      "options": {},
+      "expected_rating": "Benchmark Quality Confirmed"
+    },
+    {
+      "id": "benchmark-quality-with-caveats",
+      "results": [],
+      "options": { "caveatCount": 1 },
+      "expected_rating": "Benchmark Quality With Caveats"
+    },
+    {
+      "id": "strong-working-draft",
+      "results": [
+        {
+          "rule_id": "CONSISTENCY-001",
+          "suite": "consistency",
+          "status": "fail",
+          "severity": "error",
+          "message": "Package spelling mismatch."
+        }
+      ],
+      "options": {},
+      "expected_rating": "Strong Working Draft"
+    },
+    {
+      "id": "below-strong-working-draft",
+      "results": [
+        {
+          "rule_id": "CONTENT-001",
+          "suite": "content",
+          "status": "fail",
+          "severity": "error",
+          "message": "Hard content failure.",
+          "dominant_defect": true
+        }
+      ],
+      "options": {},
+      "expected_rating": "Below Strong Working Draft",
+      "expected_dominant_defect": "CONTENT-001: Hard content failure."
+    }
+  ]
+}

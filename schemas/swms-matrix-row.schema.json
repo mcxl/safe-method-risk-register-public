@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/swms-matrix-row.schema.json",
+  "title": "SWMS Matrix Row",
+  "description": "One row of Table 2 — required SWMS by trade package, with submission, review and commencement hold points. The principal contractor reviews and accepts for commencement; it never 'approves'.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "trade_package",
+    "scope_status",
+    "hrcw_refs",
+    "swms_title",
+    "submitted_by",
+    "reviewed_by",
+    "required_before"
+  ],
+  "properties": {
+    "trade_package": {
+      "type": "string",
+      "description": "Package name. Must match the name used in the HRCW Register and Risk Register."
+    },
+    "scope_status": {
+      "$ref": "status-taxonomy.schema.json#/$defs/scope_status",
+      "description": "Whether this SWMS row is active scope, conditional scope, excluded scope or a stop-work referral only."
+    },
+    "hrcw_refs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" },
+      "description": "Confirmed HRCW categories this package performs. Every ref must be confirmed in the HRCW Register."
+    },
+    "conditional_hrcw_refs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" },
+      "description": "Conditional HRCW categories that trigger only if the final work method or site condition confirms them."
+    },
+    "hrcw_conditions": {
+      "type": "string",
+      "description": "Free-text qualifier where a category applies only conditionally (e.g. 'H06 where confined space confirmed; H07 where re-excavation >1.5 m')."
+    },
+    "swms_title": {
+      "type": "string",
+      "description": "Title of the required SWMS. Must be consistent wherever this SWMS is referenced across the document set."
+    },
+    "submitted_by": {
+      "type": "string",
+      "description": "Subcontractor responsible for preparing the SWMS. Use '[Client To Confirm]' where the package is not yet awarded."
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Principal contractor role that reviews and accepts the SWMS for commencement (e.g. 'SD Group Site Manager'). Acceptance language only — never 'approves'."
+    },
+    "required_before": {
+      "type": "string",
+      "description": "The work that cannot commence until the SWMS is accepted."
+    },
+    "hold_points": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^HP-\\d{2}$" },
+      "description": "Hold point refs that gate this package. Every ref must exist in the Hold Point Schedule."
+    },
+    "hold_point_notes": {
+      "type": "string",
+      "description": "Verbatim hold-point wording for this package as it appears in the matrix cell. Must align with the Hold Point Schedule."
+    },
+    "supporting_document_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supporting document IDs required before issue, mobilisation or task commencement."
+    },
+    "confirmation_item_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Confirmation item IDs that may change this SWMS row's scope or HRCW status."
+    }
+  }
+}

@@ -1,0 +1,532 @@
+{
+  "document_level": "project_benchmark_register",
+  "project": {
+    "project_name": "Phase 2 Conditional Fixture",
+    "site_address": "[Client To Confirm]",
+    "principal_contractor": "[Client To Confirm]",
+    "jurisdiction": "NSW",
+    "revision": "Draft",
+    "issue_date": "[Client To Confirm]",
+    "trade_packages": [
+      "Underground services installation"
+    ]
+  },
+  "hrcw_register": [
+    {
+      "ref": "H01",
+      "schedule_1_item": 1,
+      "category_title": "Work involving a risk of a person falling more than 2 metres",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H02",
+      "schedule_1_item": 2,
+      "category_title": "Work on a telecommunication tower",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H03",
+      "schedule_1_item": 3,
+      "category_title": "Demolition of a load-bearing structure",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H04",
+      "schedule_1_item": 4,
+      "category_title": "Work involving disturbance of asbestos",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H05",
+      "schedule_1_item": 5,
+      "category_title": "Structural alterations requiring temporary support to prevent collapse",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H06",
+      "schedule_1_item": 6,
+      "category_title": "Work in or near a confined space",
+      "triggered": "CONDITIONAL",
+      "packages": [],
+      "swms_required": "CONDITIONAL",
+      "trigger_status": "conditional_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "confirmation_item_refs": []
+    },
+    {
+      "ref": "H07",
+      "schedule_1_item": 7,
+      "category_title": "Work in or near a shaft or trench with excavated depth greater than 1.5 m",
+      "triggered": "YES",
+      "packages": [],
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase-2-conditional-fixture-7"
+      ]
+    },
+    {
+      "ref": "H08",
+      "schedule_1_item": 8,
+      "category_title": "Work using explosives",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H09",
+      "schedule_1_item": 9,
+      "category_title": "Work on or near pressurised gas distribution mains or piping",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H10",
+      "schedule_1_item": 10,
+      "category_title": "Work on or near chemical, fuel or refrigerant lines",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H11",
+      "schedule_1_item": 11,
+      "category_title": "Work on or near energised electrical installations or services",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H12",
+      "schedule_1_item": 12,
+      "category_title": "Work in an area that may have a contaminated or flammable atmosphere",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H13",
+      "schedule_1_item": 13,
+      "category_title": "Work involving tilt-up or precast concrete",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H14",
+      "schedule_1_item": 14,
+      "category_title": "Work on, in or adjacent to a road, railway or other traffic corridor in use by traffic other than pedestrians",
+      "triggered": "YES",
+      "packages": [
+        "Underground services installation"
+      ],
+      "blanket_all_packages": true,
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase-2-conditional-fixture-14"
+      ]
+    },
+    {
+      "ref": "H15",
+      "schedule_1_item": 15,
+      "category_title": "Work in an area in which there is movement of powered mobile plant",
+      "triggered": "YES",
+      "packages": [
+        "Underground services installation"
+      ],
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase-2-conditional-fixture-15"
+      ]
+    },
+    {
+      "ref": "H16",
+      "schedule_1_item": 16,
+      "category_title": "Work in areas with artificial extremes of temperature",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H17",
+      "schedule_1_item": 17,
+      "category_title": "Work involving diving",
+      "triggered": "NO",
+      "packages": [],
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    }
+  ],
+  "swms_matrix": [
+    {
+      "trade_package": "Underground services installation",
+      "hrcw_refs": [
+        "H07",
+        "H14",
+        "H15"
+      ],
+      "swms_title": "Underground services installation SWMS",
+      "submitted_by": "[Client To Confirm]",
+      "reviewed_by": "Principal contractor site manager",
+      "required_before": "Before trenching commences",
+      "scope_status": "in_scope",
+      "conditional_hrcw_refs": [],
+      "supporting_document_refs": [],
+      "confirmation_item_refs": []
+    }
+  ],
+  "hold_point_schedule": [
+    {
+      "ref": "HP-01",
+      "source_pattern_id": "HP-EXCAV-INSPECT",
+      "title": "Excavation / shaft inspection before worker entry or approach",
+      "packages": [
+        "Underground services installation"
+      ],
+      "precondition": "Competent person has inspected the relevant excavation, trench or shaft and confirmed it is safe for worker entry or approach.",
+      "authority_roles": [
+        "competent_person"
+      ],
+      "authority_text": "Competent person appointed by the relevant subcontractor supervisor",
+      "evidence_required": "Inspection record signed and dated before each worker entry or approach.",
+      "release_type": "WHS",
+      "status": "confirmed_hold_point",
+      "release_criteria": "Competent person has inspected the relevant excavation, trench or shaft and confirmed it is safe for worker entry or approach.",
+      "release_authority": "Competent person appointed by the relevant subcontractor supervisor",
+      "linked_confirmation_item_refs": [],
+      "linked_supporting_document_refs": []
+    }
+  ],
+  "risk_register": [
+    {
+      "ref": "US-01",
+      "trade_package": "Underground services installation",
+      "phase": "Underground services installation",
+      "activity": "Harness-reliant access to trench edge",
+      "hazard": "Fall from height",
+      "hrcw_categories": [],
+      "classification_tags": [
+        "fall_from_height",
+        "fall_arrest_reliant"
+      ],
+      "initial_risk": "High",
+      "controls": [
+        {
+          "source_ids": [
+            "fall-arrest-anchored"
+          ],
+          "text": "Where edge protection is not practicable, a fall-arrest system anchored to verified anchor points.",
+          "levels": [
+            "engineering",
+            "administrative"
+          ],
+          "control_status": "active_control"
+        }
+      ],
+      "residual_risk": "Low",
+      "high_energy": true,
+      "fall_arrest_reliant": true,
+      "responsible_do": "Subcontractor supervisor",
+      "risk_status": "confirmed_risk",
+      "scope_status": "in_scope",
+      "conditional_hrcw_categories": [],
+      "basis_refs": [
+        "WHS-ACT-2011-S18",
+        "WHS-REG-2025-RISK-MGMT"
+      ],
+      "source_fact_refs": [
+        "risk-fact-phase-2-conditional-fixture-1"
+      ],
+      "confirmation_item_refs": [],
+      "supporting_document_refs": []
+    }
+  ],
+  "swms_benchmark_reviews": [
+    {
+      "trade_package": "Underground services installation",
+      "swms_title": "Underground services installation SWMS",
+      "criteria_evidence": {
+        "project_specificity": "Phase 3 validator fixture.",
+        "hazard_identification": "Phase 3 validator fixture.",
+        "control_adequacy": "Phase 3 validator fixture.",
+        "hold_points_named_stops": "Phase 3 validator fixture.",
+        "named_role_responsibility": "Phase 3 validator fixture."
+      }
+    }
+  ],
+  "supporting_documents": [],
+  "confirmation_items": [],
+  "legal_references": [
+    {
+      "id": "WHS-ACT-2011-S18",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 18 - reasonably practicable",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-ACT-2011-S19",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 19 - primary duty of care",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-RISK-MGMT",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), risk management duties",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-HRCW",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), high risk construction work requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-SWMS",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), SWMS requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSTRUCTION-WORK",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Construction work",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-MANAGE-WHS-RISKS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - How to manage work health and safety risks",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-FALLS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing the risk of falls at workplaces",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ELECTRICAL",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing electrical risks in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-PLANT",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of plant in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-HAZARDOUS-CHEMICALS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of hazardous chemicals in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-LEAD",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of lead in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSULTATION",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Work health and safety consultation, cooperation and coordination",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ASBESTOS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW asbestos codes of practice",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    }
+  ],
+  "historical_mode": false,
+  "intended_swms": [
+    {
+      "title": "Underground services installation SWMS",
+      "trade_package": "Underground services installation",
+      "scope_status": "in_scope"
+    }
+  ]
+}

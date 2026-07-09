@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/hold-point.schema.json",
+  "title": "Hold Point",
+  "description": "One hold point — a hard stop in the programme. Work does not proceed until the precondition is met and the evidence is on site. WHS hold points are distinct from QA / ITP release points and must be labelled.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ref",
+    "source_pattern_id",
+    "status",
+    "title",
+    "packages",
+    "precondition",
+    "release_criteria",
+    "release_authority",
+    "authority_text",
+    "evidence_required",
+    "release_type"
+  ],
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^HP-\\d{2}$",
+      "description": "HP-01, HP-02, ... Unique across the schedule."
+    },
+    "source_pattern_id": {
+      "type": "string",
+      "pattern": "^HP-[A-Z0-9-]+$",
+      "description": "Source pattern ID from knowledge/hold_point_patterns.json used to instantiate this project hold point."
+    },
+    "status": {
+      "$ref": "status-taxonomy.schema.json#/$defs/hold_point_status",
+      "description": "Operational status for confirmed, conditional, pre-mobilisation, pre-task, SWMS-update or stop-work hold points."
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the hold point (e.g. 'Tilt-up lift study reviewed before first panel lift')."
+    },
+    "packages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Packages this hold point applies to. Each must match a package name used elsewhere in the set."
+    },
+    "precondition": {
+      "type": "string",
+      "description": "The condition that must be met before proceeding. Should read as a verifiable 'do not proceed until X' statement."
+    },
+    "release_criteria": {
+      "type": "string",
+      "description": "Specific criteria that must be satisfied before the hold point is released."
+    },
+    "release_authority": {
+      "type": "string",
+      "description": "Role or person authorised to release the hold point."
+    },
+    "authority_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "principal_contractor_or_site_manager",
+          "subcontractor_supervisor",
+          "competent_person",
+          "structural_engineer",
+          "geotechnical_engineer",
+          "temporary_works_designer",
+          "consultant_or_inspector"
+        ]
+      },
+      "minItems": 1,
+      "description": "Role(s) with actual authority to release. Engineers release engineering matters only (lift studies, temporary works, erection sequence, brace removal, ground bearing, structural release)."
+    },
+    "authority_text": {
+      "type": "string",
+      "description": "Verbatim sign-off authority wording as it appears in the cell (e.g. 'Structural engineer + SD Group Site Manager')."
+    },
+    "evidence_required": {
+      "type": "string",
+      "description": "The record that must be on site (signed inspection record, written engineer authorisation, test certificate, completed checklist)."
+    },
+    "release_type": {
+      "type": "string",
+      "enum": ["WHS", "QA", "ITP"],
+      "description": "WHS hold point vs QA / ITP release point. Must be labelled — they are not interchangeable."
+    },
+    "engineering_release": {
+      "type": "boolean",
+      "description": "True where release depends on an engineering judgement (loading, access, temporary works, structural release). Used by the risk validator to confirm structural loading/access risks have an engineer-release condition."
+    },
+    "linked_confirmation_item_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Confirmation item IDs linked to this hold point."
+    },
+    "linked_supporting_document_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supporting document IDs linked to this hold point."
+    }
+  }
+}

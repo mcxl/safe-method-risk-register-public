@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/workflow-record.schema.json",
+  "title": "Workflow And Provenance Record",
+  "description": "Application-owned record for DRAFT, REVIEWED and ISSUED state, consultant sign-off and provenance. The model-generated document-set remains separate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "document_set_hash",
+    "revision",
+    "workflow_state",
+    "source_input",
+    "versions",
+    "generation",
+    "validation_report",
+    "review",
+    "output",
+    "provenance_hashes",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Application record identifier."
+    },
+    "document_set_hash": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$",
+      "description": "SHA-256 hash of the canonical model-emitted document-set JSON."
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Application revision number."
+    },
+    "workflow_state": {
+      "type": "string",
+      "enum": ["DRAFT", "REVIEWED", "ISSUED"],
+      "description": "Current workflow state. Phase 6 state-machine tests enforce allowed transitions."
+    },
+    "source_input": {
+      "type": "object",
+      "description": "Stored structured brief/interview input used to generate this revision."
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kb_version", "schema_version", "prompt_version", "model_version"],
+      "properties": {
+        "kb_version": { "type": "string" },
+        "schema_version": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "model_version": { "type": "string" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request_id", "model", "generated_at"],
+      "properties": {
+        "request_id": { "type": "string" },
+        "model": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "attempt_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "validation_report": {
+      "$ref": "validation-report.schema.json"
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": ["not_reviewed", "accepted_for_issue", "changes_required"]
+        },
+        "reviewer_name": { "type": "string" },
+        "reviewer_role": { "type": "string" },
+        "reviewed_at": { "type": "string" },
+        "comments": { "type": "string" }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["draft_available", "issue_ready", "output_hash"],
+      "properties": {
+        "draft_available": {
+          "type": "boolean",
+          "description": "True when a DRAFT output has been rendered."
+        },
+        "issue_ready": {
+          "type": "boolean",
+          "description": "True only after validation pass and consultant sign-off. Phase 6 state-machine tests enforce this."
+        },
+        "output_hash": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "description": "SHA-256 hash of the rendered output or planned output payload."
+        },
+        "manifest_path": {
+          "type": "string",
+          "description": "Path to the handoff manifest generated for the rendered output."
+        },
+        "manifest_hash": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$",
+          "description": "SHA-256 hash of the handoff manifest file."
+        }
+      }
+    },
+    "provenance_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_input_hash", "validation_report_hash", "output_hash"],
+      "properties": {
+        "source_input_hash": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "validation_report_hash": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "output_hash": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  }
+}

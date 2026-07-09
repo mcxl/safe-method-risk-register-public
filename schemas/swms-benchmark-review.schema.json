@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/swms-benchmark-review.schema.json",
+  "title": "SWMS Benchmark Review Input",
+  "description": "Structured evidence inputs for the five-criteria SWMS benchmark review. Phase 3 validators derive pass/fail results; the model does not supply the verdict.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["trade_package", "swms_title", "criteria_evidence"],
+  "properties": {
+    "trade_package": {
+      "type": "string",
+      "description": "Canonical package name reviewed."
+    },
+    "swms_title": {
+      "type": "string",
+      "description": "SWMS title being reviewed. Must match the SWMS Matrix title."
+    },
+    "criteria_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_specificity",
+        "hazard_identification",
+        "control_adequacy",
+        "hold_points_named_stops",
+        "named_role_responsibility"
+      ],
+      "properties": {
+        "project_specificity": {
+          "type": "string",
+          "description": "Evidence relevant to criterion 1."
+        },
+        "hazard_identification": {
+          "type": "string",
+          "description": "Evidence relevant to criterion 2."
+        },
+        "control_adequacy": {
+          "type": "string",
+          "description": "Evidence relevant to criterion 3."
+        },
+        "hold_points_named_stops": {
+          "type": "string",
+          "description": "Evidence relevant to criterion 4."
+        },
+        "named_role_responsibility": {
+          "type": "string",
+          "description": "Evidence relevant to criterion 5."
+        }
+      }
+    }
+  }
+}

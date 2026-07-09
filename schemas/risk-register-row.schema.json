@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/risk-register-row.schema.json",
+  "title": "Risk Register Row",
+  "description": "One activity-level row of the Project Risk Register — the minimum project control benchmark. Broader than the HRCW Register: covers HRCW and non-HRCW risks. Controls are tagged with hierarchy levels so residual-risk realism can be checked deterministically.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ref",
+    "trade_package",
+    "risk_status",
+    "scope_status",
+    "phase",
+    "activity",
+    "hazard",
+    "classification_tags",
+    "initial_risk",
+    "controls",
+    "residual_risk",
+    "responsible_do"
+  ],
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}-[0-9]{2}[A-Z]?$",
+      "description": "Phase-prefixed row ref (e.g. SE-01, BF-03, TP-01A)."
+    },
+    "trade_package": {
+      "type": "string",
+      "description": "Canonical package name for this risk row. Must be an exact member of project.trade_packages."
+    },
+    "risk_status": {
+      "$ref": "status-taxonomy.schema.json#/$defs/risk_status",
+      "description": "Whether this is confirmed, conditional, latent, not applicable or a scope exclusion."
+    },
+    "scope_status": {
+      "$ref": "status-taxonomy.schema.json#/$defs/scope_status",
+      "description": "Whether the activity is active scope, conditional scope, excluded scope or stop-work referral only."
+    },
+    "phase": {
+      "type": "string",
+      "description": "Construction phase header (e.g. '1 — SITE ESTABLISHMENT'). Rows are ordered in construction sequence."
+    },
+    "activity": {
+      "type": "string",
+      "description": "The activity being performed."
+    },
+    "hazard": {
+      "type": "string",
+      "description": "The material hazard. Include only hazards materially created by this package — not generic construction hazards."
+    },
+    "hrcw_categories": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" },
+      "description": "Confirmed HRCW categories engaged by this row. Empty when non_hrcw = true or the trigger is conditional only."
+    },
+    "conditional_hrcw_categories": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" },
+      "description": "Conditional HRCW categories that apply only if the final method or site condition confirms the trigger."
+    },
+    "non_hrcw": {
+      "type": "boolean",
+      "description": "True for genuine non-HRCW risks (manual handling, thermal, dust/RCS alone, QA). RCS dust alone is non-HRCW and must not be coded H12."
+    },
+    "latent_condition": {
+      "type": "boolean",
+      "description": "True where the risk is possible but not planned (suspected ACM, hidden live services, unexpected ground). Controls must use stop-work / isolate / assess / revised-method logic."
+    },
+    "classification_tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fall_from_height",
+          "suspended_load",
+          "crane_lift",
+          "mobile_plant",
+          "temporary_works",
+          "unverified_roof_access",
+          "openings",
+          "public_or_occupied_interface",
+          "large_public_or_occupied_interface",
+          "structural_loading",
+          "access_risk",
+          "engineering_release_required",
+          "fall_arrest_reliant",
+          "non_hrcw",
+          "other"
+        ]
+      },
+      "description": "Machine-readable risk classifications used by Phase 3 validators. Empty only where no listed classification applies."
+    },
+    "initial_risk": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"],
+      "description": "Risk before controls. High(3) / Medium(2) / Low(1)."
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Minimum-standard controls. Each carries the hierarchy level(s) it represents, enabling deterministic residual checks.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_ids", "text", "levels", "control_status"],
+        "properties": {
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" },
+            "description": "Source control ID(s) from knowledge/control_library.json selected for this control."
+          },
+          "text": {
+            "type": "string",
+            "description": "The control statement. Must state what is controlled, how, when, who verifies, and what happens if missing. Weak patterns ('use safe work practices', bare 'wear PPE', 'follow SWMS') are rejected."
+          },
+          "levels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": ["elimination", "substitution", "isolation", "engineering", "administrative", "ppe"]
+            },
+            "description": "Hierarchy-of-control level(s) this control represents."
+          },
+          "control_status": {
+            "$ref": "status-taxonomy.schema.json#/$defs/control_status",
+            "description": "Whether this control is active, conditional, stop-work, supporting-document based or not applicable."
+          },
+          "fixed_numeric_limits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["value_text", "basis"],
+              "properties": {
+                "value_text": {
+                  "type": "string",
+                  "description": "The fixed numeric limit stated in the control text."
+                },
+                "basis": {
+                  "type": "string",
+                  "enum": ["engineer", "manufacturer", "standard", "site_rule"],
+                  "description": "Machine-readable basis for the numeric limit."
+                },
+                "basis_reference": {
+                  "type": "string",
+                  "description": "Optional source reference, such as drawing, manufacturer instruction, standard clause or site rule."
+                }
+              }
+            },
+            "description": "Required by Phase 3 validators when the control text contains a fixed numeric limit."
+          }
+        }
+      }
+    },
+    "residual_risk": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"],
+      "description": "Risk after controls. May reduce only where controls materially change exposure — never to Low on administrative/PPE controls alone for a high-energy activity."
+    },
+    "residual_justification": {
+      "type": "string",
+      "description": "Why the residual rating is credible. Required where high_energy = true (so a reduction is not asserted without basis)."
+    },
+    "high_energy": {
+      "type": "boolean",
+      "description": "True for fall from height, suspended load, mobile-plant interaction, temporary-works reliance, unverified roof access, openings, large public/occupied interface, high-energy plant/services. Triggers the residual-realism and exclusion-zone validators."
+    },
+    "fall_arrest_reliant": {
+      "type": "boolean",
+      "description": "True where the control relies on fall arrest. Requires rescue_readiness and residual no lower than Medium."
+    },
+    "rescue_readiness": {
+      "type": "string",
+      "description": "Rescue-from-height readiness statement. Required when fall_arrest_reliant = true."
+    },
+    "exclusion_or_segregation": {
+      "type": "boolean",
+      "description": "True where an exclusion zone or physical segregation control is present. Required when high_energy = true."
+    },
+    "responsible_do": {
+      "type": "string",
+      "description": "Primary accountable role that implements the work ('Do:'). A real role, never 'all personnel'."
+    },
+    "responsible_verify": {
+      "type": "string",
+      "description": "Role that verifies ('Verify:')."
+    },
+    "swms_title": {
+      "type": "string",
+      "description": "Governing SWMS title, or '—' where none. Must match the SWMS Matrix title."
+    },
+    "hold_points": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^HP-\\d{2}$" },
+      "description": "Hold point refs named in this row. Every ref must exist in the Hold Point Schedule."
+    },
+    "basis_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Legal or code reference IDs supporting the risk row."
+    },
+    "source_fact_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Project-fact IDs or approved source refs supporting confirmed risk/scope status."
+    },
+    "confirmation_item_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Confirmation item IDs that may change this risk, scope, HRCW or control status."
+    },
+    "supporting_document_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supporting document IDs linked to this risk row."
+    },
+    "override_allowed": {
+      "type": "boolean",
+      "description": "True only where a professional/audited override is permitted for this row."
+    },
+    "override_reason": {
+      "type": "string",
+      "description": "Audit reason for an override decision."
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Person or role approving the override."
+    },
+    "approval_date": {
+      "type": "string",
+      "description": "Date of override approval."
+    },
+    "source_or_basis": {
+      "type": "string",
+      "description": "Evidence or source basis for the override."
+    }
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "document_level": "project_benchmark_register",
+  "project": {
+    "project_name": "Phase 2 Structural Fixture",
+    "site_address": "[Client To Confirm]",
+    "principal_contractor": "[Client To Confirm]",
+    "whs_consultant": "[Client To Confirm]",
+    "jurisdiction": "NSW",
+    "document_ref": "PHASE2-STRUCTURAL",
+    "revision": "Draft",
+    "issue_date": "[Client To Confirm]",
+    "methodology_sequence": [
+      "Tilt-up panel erection"
+    ],
+    "trade_packages": [
+      "Tilt-up panel erection"
+    ],
+    "interfaces_constraints": [
+      "[Client To Confirm]"
+    ]
+  },
+  "hrcw_register": [
+    {
+      "ref": "H01",
+      "schedule_1_item": 1,
+      "category_title": "Work involving a risk of a person falling more than 2 metres",
+      "triggered": "YES",
+      "packages": [
+        "Tilt-up panel erection"
+      ],
+      "risk_description": "Fall during erection / EWP work.",
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase2-structural-1"
+      ]
+    },
+    {
+      "ref": "H02",
+      "schedule_1_item": 2,
+      "category_title": "Work on a telecommunication tower",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H03",
+      "schedule_1_item": 3,
+      "category_title": "Demolition of a load-bearing structure",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H04",
+      "schedule_1_item": 4,
+      "category_title": "Work involving disturbance of asbestos",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H05",
+      "schedule_1_item": 5,
+      "category_title": "Structural alterations requiring temporary support to prevent collapse",
+      "triggered": "YES",
+      "packages": [
+        "Tilt-up panel erection"
+      ],
+      "risk_description": "Engineered temporary bracing required until permanent connections complete.",
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase2-structural-5"
+      ]
+    },
+    {
+      "ref": "H06",
+      "schedule_1_item": 6,
+      "category_title": "Work in or near a confined space",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H07",
+      "schedule_1_item": 7,
+      "category_title": "Work in or near a shaft or trench with excavated depth greater than 1.5 m",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H08",
+      "schedule_1_item": 8,
+      "category_title": "Work using explosives",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H09",
+      "schedule_1_item": 9,
+      "category_title": "Work on or near pressurised gas distribution mains or piping",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H10",
+      "schedule_1_item": 10,
+      "category_title": "Work on or near chemical, fuel or refrigerant lines",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H11",
+      "schedule_1_item": 11,
+      "category_title": "Work on or near energised electrical installations or services",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H12",
+      "schedule_1_item": 12,
+      "category_title": "Work in an area that may have a contaminated or flammable atmosphere",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H13",
+      "schedule_1_item": 13,
+      "category_title": "Work involving tilt-up or precast concrete",
+      "triggered": "YES",
+      "packages": [
+        "Tilt-up panel erection"
+      ],
+      "risk_description": "Panels formed and poured on site, then crane-lifted.",
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase2-structural-13"
+      ]
+    },
+    {
+      "ref": "H14",
+      "schedule_1_item": 14,
+      "category_title": "Work on, in or adjacent to a road, railway or other traffic corridor in use by traffic other than pedestrians",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H15",
+      "schedule_1_item": 15,
+      "category_title": "Work in an area in which there is movement of powered mobile plant",
+      "triggered": "YES",
+      "packages": [
+        "Tilt-up panel erection"
+      ],
+      "risk_description": "Mobile crane, telehandler.",
+      "swms_required": "YES",
+      "trigger_status": "confirmed_hrcw",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ],
+      "source_fact_refs": [
+        "fact-phase2-structural-15"
+      ]
+    },
+    {
+      "ref": "H16",
+      "schedule_1_item": 16,
+      "category_title": "Work in areas with artificial extremes of temperature",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    },
+    {
+      "ref": "H17",
+      "schedule_1_item": 17,
+      "category_title": "Work involving diving",
+      "triggered": "NO",
+      "packages": [],
+      "risk_description": "",
+      "swms_required": "NO",
+      "trigger_status": "not_triggered",
+      "basis_refs": [
+        "WHS-REG-2025-HRCW",
+        "WHS-REG-2025-SWMS",
+        "WHS-ACT-2011-S19"
+      ]
+    }
+  ],
+  "swms_matrix": [
+    {
+      "trade_package": "Tilt-up panel erection",
+      "hrcw_refs": [
+        "H01",
+        "H05",
+        "H13",
+        "H15"
+      ],
+      "swms_title": "Tilt-up panel erection SWMS",
+      "submitted_by": "[Client To Confirm]",
+      "reviewed_by": "Principal contractor site manager",
+      "required_before": "Before tilt-up panel erection commences",
+      "hold_points": [
+        "HP-01"
+      ],
+      "hold_point_notes": "HP-01 Lift study reviewed before first panel lift.",
+      "scope_status": "in_scope",
+      "conditional_hrcw_refs": [],
+      "supporting_document_refs": [],
+      "confirmation_item_refs": []
+    }
+  ],
+  "hold_point_schedule": [
+    {
+      "ref": "HP-01",
+      "source_pattern_id": "HP-ENG-LIFT-STUDY",
+      "title": "Lift study reviewed before first panel lift",
+      "packages": [
+        "Tilt-up panel erection"
+      ],
+      "precondition": "Lift study and erection sequence prepared and reviewed by the appointed structural engineer; document on site before any panel is lifted.",
+      "authority_roles": [
+        "structural_engineer",
+        "principal_contractor_or_site_manager"
+      ],
+      "authority_text": "Structural engineer (appointed for the project) + [PC] Site Manager",
+      "evidence_required": "Signed lift study document on site; engineer review confirmation in writing.",
+      "release_type": "WHS",
+      "engineering_release": true,
+      "status": "confirmed_hold_point",
+      "release_criteria": "Lift study and erection sequence prepared and reviewed by the appointed structural engineer; document on site before any panel is lifted.",
+      "release_authority": "Structural engineer (appointed for the project) + [PC] Site Manager",
+      "linked_confirmation_item_refs": [],
+      "linked_supporting_document_refs": []
+    }
+  ],
+  "risk_register": [
+    {
+      "ref": "TP-01",
+      "trade_package": "Tilt-up panel erection",
+      "phase": "Tilt-up panel erection",
+      "activity": "Panel lifting",
+      "hazard": "Tilt-up panel lift / failure",
+      "hrcw_categories": [
+        "H13",
+        "H15"
+      ],
+      "classification_tags": [
+        "suspended_load",
+        "crane_lift",
+        "structural_loading"
+      ],
+      "initial_risk": "High",
+      "controls": [
+        {
+          "source_ids": [
+            "tiltup-panel-lift"
+          ],
+          "text": "Panels not lifted until concrete strength confirmed at minimum design MPa; lift study reviewed by the structural engineer before first lift; lifting clutches matched to the cast-in inserts (no substitution); damaged panels not lifted without written panel-designer approval.",
+          "levels": [
+            "engineering",
+            "administrative"
+          ],
+          "control_status": "active_control"
+        }
+      ],
+      "residual_risk": "Medium",
+      "residual_justification": "Engineering release and lift-study controls materially reduce exposure but do not remove suspended-load risk.",
+      "high_energy": true,
+      "exclusion_or_segregation": true,
+      "responsible_do": "Tilt-up subcontractor supervisor",
+      "responsible_verify": "Principal contractor site manager",
+      "swms_title": "Tilt-up panel erection SWMS",
+      "hold_points": [
+        "HP-01"
+      ],
+      "risk_status": "confirmed_risk",
+      "scope_status": "in_scope",
+      "conditional_hrcw_categories": [],
+      "basis_refs": [
+        "WHS-ACT-2011-S18",
+        "WHS-REG-2025-RISK-MGMT"
+      ],
+      "source_fact_refs": [
+        "risk-fact-phase2-structural-1"
+      ],
+      "confirmation_item_refs": [],
+      "supporting_document_refs": []
+    }
+  ],
+  "swms_benchmark_reviews": [
+    {
+      "trade_package": "Tilt-up panel erection",
+      "swms_title": "Tilt-up panel erection SWMS",
+      "criteria_evidence": {
+        "project_specificity": "Package, project and hold-point references are named.",
+        "hazard_identification": "HRCW categories and suspended-load hazards are identified.",
+        "control_adequacy": "Controls reference selected KB source controls and engineering release.",
+        "hold_points_named_stops": "HP-01 is named as a stop before first panel lift.",
+        "named_role_responsibility": "Subcontractor supervisor and principal contractor site manager are named."
+      }
+    }
+  ],
+  "swms_benchmark_note": "Structural schema fixture only; deterministic benchmark verdict is Phase 3.",
+  "supporting_documents": [],
+  "confirmation_items": [],
+  "legal_references": [
+    {
+      "id": "WHS-ACT-2011-S18",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 18 - reasonably practicable",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-ACT-2011-S19",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 19 - primary duty of care",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-RISK-MGMT",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), risk management duties",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-HRCW",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), high risk construction work requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-SWMS",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), SWMS requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSTRUCTION-WORK",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Construction work",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-MANAGE-WHS-RISKS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - How to manage work health and safety risks",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-FALLS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing the risk of falls at workplaces",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ELECTRICAL",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing electrical risks in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-PLANT",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of plant in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-HAZARDOUS-CHEMICALS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of hazardous chemicals in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-LEAD",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of lead in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSULTATION",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Work health and safety consultation, cooperation and coordination",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ASBESTOS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW asbestos codes of practice",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    }
+  ],
+  "historical_mode": false,
+  "intended_swms": [
+    {
+      "title": "Tilt-up panel erection SWMS",
+      "trade_package": "Tilt-up panel erection",
+      "scope_status": "in_scope"
+    }
+  ]
+}

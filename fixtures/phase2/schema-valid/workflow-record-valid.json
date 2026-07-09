@@ -1,0 +1,54 @@
+{
+  "record_id": "phase2-workflow-fixture",
+  "document_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "revision": 1,
+  "workflow_state": "DRAFT",
+  "source_input": {
+    "project_name": "Phase 2 Structural Fixture"
+  },
+  "versions": {
+    "kb_version": "kb-2026-06-24",
+    "schema_version": "schema-phase-2",
+    "prompt_version": "prompt-not-yet-generated",
+    "model_version": "model-not-called"
+  },
+  "generation": {
+    "request_id": "phase2-local-fixture",
+    "model": "model-not-called",
+    "generated_at": "2026-06-26T00:00:00Z",
+    "attempt_count": 1
+  },
+  "validation_report": {
+    "schema_version": "schema-phase-2",
+    "document_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "validated_at": "2026-06-26T00:00:00Z",
+    "status": "pass",
+    "results": [
+      {
+        "rule_id": "SCHEMA-001",
+        "suite": "schema",
+        "status": "pass",
+        "severity": "info",
+        "message": "Document set satisfies the structural schema contract."
+      }
+    ],
+    "verdict": {
+      "rating": "Benchmark Quality Confirmed"
+    }
+  },
+  "review": {
+    "state": "not_reviewed"
+  },
+  "output": {
+    "draft_available": true,
+    "issue_ready": false,
+    "output_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "provenance_hashes": {
+    "source_input_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "validation_report_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "output_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "created_at": "2026-06-26T00:00:00Z",
+  "updated_at": "2026-06-26T00:00:00Z"
+}

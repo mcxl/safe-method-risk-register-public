@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/validation-report.schema.json",
+  "title": "Validation Report",
+  "description": "Application-owned deterministic validation report. Rule results are produced by validators, not by the generation model.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "document_set_hash", "validated_at", "status", "results", "verdict"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema contract version used for validation."
+    },
+    "document_set_hash": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$",
+      "description": "SHA-256 hash of the canonical document-set JSON validated."
+    },
+    "validated_at": {
+      "type": "string",
+      "description": "Timestamp recorded by the application."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "fail"],
+      "description": "Overall deterministic validation status."
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "suite", "status", "severity", "message"],
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+-[0-9]{3}$",
+            "description": "Stable deterministic rule ID."
+          },
+          "suite": {
+            "type": "string",
+            "enum": ["schema", "consistency", "content", "risk", "swms_review", "verdict"],
+            "description": "Validator suite that produced the result."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pass", "fail", "not_applicable"],
+            "description": "Rule-level status."
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["error", "warning", "info"],
+            "description": "Severity used by the validation display."
+          },
+          "message": {
+            "type": "string",
+            "description": "Actionable deterministic message."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "Optional JSON path to the affected value."
+          },
+          "criterion_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "SWMS benchmark criterion number where applicable."
+          },
+          "dominant_defect": {
+            "type": "boolean",
+            "description": "True where this result supplies the single dominant defect for the derived verdict."
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rating"],
+      "properties": {
+        "rating": {
+          "type": "string",
+          "enum": [
+            "Benchmark Quality Confirmed",
+            "Benchmark Quality With Caveats",
+            "Strong Working Draft",
+            "Below Strong Working Draft"
+          ],
+          "description": "Derived verdict rating."
+        },
+        "dominant_defect": {
+          "type": "string",
+          "description": "Required by Phase 3 when the verdict is Below Strong Working Draft."
+        }
+      }
+    }
+  }
+}

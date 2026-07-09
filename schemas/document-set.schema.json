@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/document-set.schema.json",
+  "title": "WHS Document Set",
+  "description": "The complete coordinated control document set the generation model emits and the validators run over. Holds project metadata and all four tables so cross-table consistency (package names, HRCW refs, hold-point counts, SWMS titles) can be checked deterministically.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document_level",
+    "project",
+    "hrcw_register",
+    "swms_matrix",
+    "hold_point_schedule",
+    "risk_register",
+    "swms_benchmark_reviews",
+    "intended_swms",
+    "supporting_documents",
+    "confirmation_items",
+    "legal_references"
+  ],
+  "properties": {
+    "document_level": {
+      "type": "string",
+      "enum": [
+        "project_benchmark_register",
+        "package_level_risk_assessment",
+        "task_risk_assessment_jsa"
+      ],
+      "description": "Stated upfront. A project_benchmark_register must not drift into task-by-task sequencing."
+    },
+    "project": { "$ref": "project-meta.schema.json" },
+    "hrcw_register": {
+      "type": "array",
+      "items": { "$ref": "hrcw-register-row.schema.json" },
+      "minItems": 17,
+      "maxItems": 17,
+      "description": "All 17 Schedule 1 categories assessed — triggered or not."
+    },
+    "swms_matrix": {
+      "type": "array",
+      "items": { "$ref": "swms-matrix-row.schema.json" }
+    },
+    "hold_point_schedule": {
+      "type": "array",
+      "items": { "$ref": "hold-point.schema.json" }
+    },
+    "risk_register": {
+      "type": "array",
+      "items": { "$ref": "risk-register-row.schema.json" }
+    },
+    "swms_benchmark_reviews": {
+      "type": "array",
+      "items": { "$ref": "swms-benchmark-review.schema.json" },
+      "description": "Structured evidence inputs for the Phase 3 five-criteria SWMS benchmark review."
+    },
+    "swms_benchmark_note": {
+      "type": "string",
+      "description": "Short SWMS review benchmark note where relevant."
+    },
+    "intended_swms": {
+      "type": "array",
+      "description": "Actual intended SWMS titles for this project. Supporting documents are not SWMS unless their title appears here.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "scope_status"],
+        "properties": {
+          "title": { "type": "string" },
+          "trade_package": { "type": "string" },
+          "scope_status": { "$ref": "status-taxonomy.schema.json#/$defs/scope_status" }
+        }
+      }
+    },
+    "supporting_documents": {
+      "type": "array",
+      "description": "Supporting documents required before issue, mobilisation or task work. These are not SWMS unless also listed in the intended SWMS structure.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "status", "description"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "title": { "type": "string" },
+          "status": { "$ref": "status-taxonomy.schema.json#/$defs/supporting_document_status" },
+          "description": { "type": "string" },
+          "owner_role": { "type": "string" },
+          "evidence_required": { "type": "string" },
+          "confirmation_item_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "confirmation_items": {
+      "type": "array",
+      "description": "Open or resolved project confirmations. Blocking levels decide whether issue, mobilisation, task work or SWMS updates can proceed.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "status",
+          "blocking_level",
+          "owner_role",
+          "evidence_required"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "title": { "type": "string" },
+          "status": { "$ref": "status-taxonomy.schema.json#/$defs/confirmation_status" },
+          "blocking_level": { "$ref": "status-taxonomy.schema.json#/$defs/blocking_level" },
+          "owner_role": { "type": "string" },
+          "evidence_required": { "type": "string" },
+          "notes": { "type": "string" },
+          "transition_effects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["target_type", "refs"],
+              "properties": {
+                "target_type": {
+                  "type": "string",
+                  "enum": ["hrcw", "risk", "control", "hold_point", "swms_matrix"]
+                },
+                "refs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "string" }
+                },
+                "new_status": { "type": "string" },
+                "promote_hrcw_refs": {
+                  "type": "array",
+                  "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" }
+                },
+                "supporting_document_refs": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "requires_swms_update": { "type": "boolean" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "legal_references": {
+      "type": "array",
+      "description": "Versioned legal and code references used for traceability. Current outputs must use current references unless historical mode is explicit.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "jurisdiction",
+          "source_url",
+          "citation",
+          "effective_from",
+          "date_checked",
+          "checked_by_process",
+          "historical_mode_allowed"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "jurisdiction": { "type": "string" },
+          "source_url": { "type": "string" },
+          "citation": { "type": "string" },
+          "effective_from": { "type": "string" },
+          "effective_to": { "type": ["string", "null"] },
+          "date_checked": { "type": "string" },
+          "checked_by_process": { "type": "string" },
+          "historical_mode_allowed": { "type": "boolean" }
+        }
+      }
+    },
+    "historical_mode": {
+      "type": "boolean",
+      "description": "True only for explicitly historical outputs allowed to use superseded legal references."
+    }
+  }
+}

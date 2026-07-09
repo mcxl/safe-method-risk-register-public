@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/project-brief.schema.json",
+  "title": "Project Brief",
+  "description": "Structured project intake/interview input used before retrieval and generation. This is source input, not the generated document set.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "brief_id",
+    "schema_version",
+    "document_level",
+    "project",
+    "methodology_sequence",
+    "trade_packages",
+    "interfaces_constraints"
+  ],
+  "properties": {
+    "brief_id": {
+      "type": "string",
+      "description": "Stable local fixture or application brief identifier."
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Project brief schema version."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": { "type": "string" },
+        "revision": { "type": "string" },
+        "derived_from": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "document_level": {
+      "type": "string",
+      "enum": ["project_benchmark_register"]
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_name",
+        "site_address",
+        "principal_contractor",
+        "jurisdiction",
+        "revision",
+        "issue_date"
+      ],
+      "properties": {
+        "project_name": { "type": "string" },
+        "site_address": { "type": "string" },
+        "principal_contractor": { "type": "string" },
+        "whs_consultant": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "document_ref": { "type": "string" },
+        "revision": { "type": "string" },
+        "issue_date": { "type": "string" },
+        "review_date": { "type": "string" }
+      }
+    },
+    "methodology_sequence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "trade_packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["input_name"],
+        "properties": {
+          "input_name": { "type": "string" },
+          "canonical_name": {
+            "type": "string",
+            "description": "Optional already-normalised name. Input aliases are resolved before generation."
+          }
+        }
+      }
+    },
+    "interfaces_constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "known_project_conditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "User-provided project facts or placeholders. The model evaluates WHS significance in the prompt layer."
+    },
+    "project_facts": {
+      "type": "array",
+      "description": "Structured project facts. Confirmed statuses must be traceable to these facts, client confirmation or audited override.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "statement", "source"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "conditional", "unknown", "not_applicable"]
+          },
+          "statement": { "type": "string" },
+          "source": { "type": "string" },
+          "related_hrcw_refs": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" }
+          }
+        }
+      }
+    },
+    "intended_swms": {
+      "type": "array",
+      "description": "Actual intended SWMS titles. Supporting documents must not be emitted as SWMS unless listed here.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "trade_package": { "type": "string" },
+          "scope_status": { "$ref": "status-taxonomy.schema.json#/$defs/scope_status" }
+        }
+      }
+    },
+    "supporting_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "status": { "$ref": "status-taxonomy.schema.json#/$defs/supporting_document_status" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "confirmation_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "status", "blocking_level", "owner_role", "evidence_required"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "status": { "$ref": "status-taxonomy.schema.json#/$defs/confirmation_status" },
+          "blocking_level": { "$ref": "status-taxonomy.schema.json#/$defs/blocking_level" },
+          "owner_role": { "type": "string" },
+          "evidence_required": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "fixture_expectations": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Golden comparison expectations used by local Phase 4 verification only.",
+      "properties": {
+        "triggered_hrcw": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "triggered"],
+            "properties": {
+              "ref": { "type": "string", "pattern": "^H(0[1-9]|1[0-7])$" },
+              "triggered": { "type": "string", "enum": ["YES", "CONDITIONAL"] }
+            }
+          }
+        },
+        "hold_point_source_pattern_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "required_control_source_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

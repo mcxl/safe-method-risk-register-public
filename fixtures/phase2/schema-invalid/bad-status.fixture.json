@@ -1,0 +1,12 @@
+{
+  "schema": "document-set.schema.json",
+  "source": "../schema-valid/document-set-structural-valid.json",
+  "description": "Unknown/deprecated status values must fail structural validation.",
+  "mutations": [
+    {
+      "op": "set",
+      "path": ["hrcw_register", 0, "trigger_status"],
+      "value": "YES"
+    }
+  ]
+}

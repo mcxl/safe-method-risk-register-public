@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/handoff-manifest.schema.json",
+  "title": "Handoff Manifest",
+  "description": "Application-owned build, handoff and provenance manifest for rendered Safe Method outputs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "generated_at",
+    "output_mode",
+    "issue_ready",
+    "document",
+    "handoff",
+    "output",
+    "source_inputs",
+    "hashes",
+    "unresolved_markers",
+    "validation",
+    "verifier_status",
+    "phase_gate_status",
+    "skipped_checks",
+    "credential_gated_checks",
+    "review",
+    "preflight"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "output_mode": { "type": "string", "enum": ["draft", "final"] },
+    "issue_ready": { "type": "boolean" },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_name", "document_ref", "revision", "issue_date", "date_stamp"],
+      "properties": {
+        "project_name": { "type": "string" },
+        "document_ref": { "type": "string" },
+        "revision": { "type": "string" },
+        "issue_date": { "type": "string" },
+        "date_stamp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "value"],
+          "properties": {
+            "source": { "type": "string" },
+            "value": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recipients", "subject"],
+      "properties": {
+        "recipients": { "type": "array", "items": { "type": "string" } },
+        "subject": { "type": "string" }
+      }
+    },
+    "output": { "$ref": "#/$defs/file_output" },
+    "source_inputs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_input" }
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_set_canonical_sha256", "schemas", "rules", "generator", "renderer"],
+      "properties": {
+        "document_set_canonical_sha256": { "$ref": "#/$defs/sha256" },
+        "schemas": { "type": "array", "items": { "$ref": "#/$defs/file_hash" } },
+        "rules": { "type": "array", "items": { "$ref": "#/$defs/file_hash" } },
+        "generator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "prompt_version"],
+          "properties": {
+            "version": { "type": "string" },
+            "prompt_version": { "type": "string" }
+          }
+        },
+        "renderer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version"],
+          "properties": {
+            "version": { "type": "string" }
+          }
+        }
+      }
+    },
+    "unresolved_markers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "markers", "locations"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "markers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["marker", "count"],
+            "properties": {
+              "marker": { "type": "string" },
+              "count": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["marker", "json_path", "count"],
+            "properties": {
+              "marker": { "type": "string" },
+              "json_path": { "type": "string" },
+              "count": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "schema_status",
+        "rule_status",
+        "verdict",
+        "failure_count",
+        "failures"
+      ],
+      "properties": {
+        "status": { "type": "string", "enum": ["pass", "fail"] },
+        "schema_status": { "type": "string" },
+        "rule_status": { "type": "string" },
+        "verdict": { "type": ["object", "null"] },
+        "failure_count": { "type": "integer", "minimum": 0 },
+        "failures": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "verifier_status": { "type": "array", "items": { "$ref": "#/$defs/status_entry" } },
+    "phase_gate_status": { "type": "array", "items": { "$ref": "#/$defs/status_entry" } },
+    "skipped_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "status", "reason", "required"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["skip", "not_run"] },
+          "reason": { "type": "string" },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "credential_gated_checks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/status_entry" }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reviewer_name", "reviewer_role", "reviewed_at", "comments"],
+      "properties": {
+        "state": { "type": "string" },
+        "reviewer_name": { "type": ["string", "null"] },
+        "reviewer_role": { "type": ["string", "null"] },
+        "reviewed_at": { "type": ["string", "null"] },
+        "comments": { "type": ["string", "null"] }
+      }
+    },
+    "preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "issue_ready", "checks"],
+      "properties": {
+        "status": { "type": "string", "enum": ["pass", "blocked"] },
+        "issue_ready": { "type": "boolean" },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "status", "message"],
+            "properties": {
+              "id": { "type": "string" },
+              "status": { "type": "string", "enum": ["pass", "fail", "warning"] },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "file_hash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "absolute_path", "bytes", "sha256"],
+      "properties": {
+        "relative_path": { "type": "string" },
+        "absolute_path": { "type": "string" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "file_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exists",
+        "expected_file_name",
+        "file_name",
+        "extension",
+        "relative_path",
+        "absolute_path",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "exists": { "type": "boolean" },
+        "expected_file_name": { "type": "string" },
+        "file_name": { "type": ["string", "null"] },
+        "extension": { "type": "string" },
+        "relative_path": { "type": ["string", "null"] },
+        "absolute_path": { "type": ["string", "null"] },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "source_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "label", "relative_path", "absolute_path", "exists", "bytes", "sha256"],
+      "properties": {
+        "role": { "type": "string" },
+        "label": { "type": "string" },
+        "relative_path": { "type": ["string", "null"] },
+        "absolute_path": { "type": ["string", "null"] },
+        "exists": { "type": ["boolean", "null"] },
+        "bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "status_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "status", "required"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phase": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["pass", "fail", "skip", "blocked", "not_run", "warning"]
+        },
+        "required": { "type": "boolean" },
+        "evidence": { "type": "string" },
+        "evidence_path": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    }
+  }
+}

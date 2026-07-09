@@ -1,0 +1,12 @@
+{
+  "description": "malformed HRCW refs fail structural validation",
+  "schema": "document-set.schema.json",
+  "source": "../schema-valid/document-set-structural-valid.json",
+  "mutations": [
+    {
+      "op": "set",
+      "path": ["hrcw_register", 0, "ref"],
+      "value": "HX1"
+    }
+  ]
+}

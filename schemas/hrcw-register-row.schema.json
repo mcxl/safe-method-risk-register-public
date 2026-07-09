@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/hrcw-register-row.schema.json",
+  "title": "HRCW Register Row",
+  "description": "One row of Table 1 — the legal HRCW trigger map. Maps a single Schedule 1 category to the packages that genuinely trigger it. This is NOT the risk register.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ref",
+    "schedule_1_item",
+    "category_title",
+    "triggered",
+    "trigger_status",
+    "packages",
+    "swms_required",
+    "basis_refs"
+  ],
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^H(0[1-9]|1[0-7])$",
+      "description": "H01–H17, fixed to Schedule 1 ordering."
+    },
+    "schedule_1_item": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 17,
+      "description": "Schedule 1 item number. Must equal the numeric part of ref."
+    },
+    "category_title": {
+      "type": "string",
+      "description": "Canonical Schedule 1 category wording. Validator checks against /knowledge/schedule-1.json — must not be paraphrased."
+    },
+    "triggered": {
+      "type": "string",
+      "enum": ["YES", "NO", "CONDITIONAL"],
+      "description": "CONDITIONAL = triggered only where a stated site condition is confirmed (e.g. confined space on assessment)."
+    },
+    "trigger_status": {
+      "$ref": "status-taxonomy.schema.json#/$defs/hrcw_status",
+      "description": "Operational HRCW status. Confirmed HRCW drives active SWMS scope; conditional/status-only rows drive confirmations, hold points and stop-work controls."
+    },
+    "condition": {
+      "type": "string",
+      "description": "The specific condition under which a CONDITIONAL category applies. Required when triggered = CONDITIONAL."
+    },
+    "packages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Trade packages that genuinely trigger this category. Empty only when triggered = NO. Each name must match the package names used in the SWMS Matrix and Risk Register."
+    },
+    "blanket_all_packages": {
+      "type": "boolean",
+      "description": "True only if the trigger genuinely spans all packages. Requires blanket_justification."
+    },
+    "blanket_justification": {
+      "type": "string",
+      "description": "Why an all-packages trigger is justified. Required when blanket_all_packages = true."
+    },
+    "risk_description": {
+      "type": "string",
+      "description": "What creates the HRCW risk for the listed packages. Empty when triggered = NO."
+    },
+    "assessment_confirmed": {
+      "type": "boolean",
+      "description": "True only where a required formal assessment has confirmed the category applies, such as H06 confined space. Phase 3 validators decide when this is mandatory."
+    },
+    "swms_required": {
+      "type": "string",
+      "enum": ["YES", "NO", "CONDITIONAL"],
+      "description": "Whether a SWMS is required for this category. CONDITIONAL = required only where the condition is confirmed."
+    },
+    "basis_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Legal or code reference IDs supporting the HRCW assessment."
+    },
+    "source_fact_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Project-fact IDs or approved source refs that support a confirmed HRCW status."
+    },
+    "confirmation_item_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Confirmation item IDs that must be resolved before this row can become confirmed."
+    },
+    "supporting_document_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supporting document IDs linked to this trigger."
+    },
+    "override_allowed": {
+      "type": "boolean",
+      "description": "True only where a professional/audited override is permitted for this row."
+    },
+    "override_reason": {
+      "type": "string",
+      "description": "Audit reason for an override decision."
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Person or role approving the override."
+    },
+    "approval_date": {
+      "type": "string",
+      "description": "Date of override approval."
+    },
+    "source_or_basis": {
+      "type": "string",
+      "description": "Evidence or source basis for the override."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Conditions, permits or contingencies. Must not state that the principal contractor 'approves' a subcontractor SWMS."
+    }
+  }
+}

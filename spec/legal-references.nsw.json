@@ -1,0 +1,162 @@
+{
+  "reference_set_id": "nsw-whs-current-2026-07-05",
+  "jurisdiction": "NSW",
+  "date_checked": "2026-07-05",
+  "checked_by_process": "Codex implementation check against official NSW legislation and SafeWork NSW pages",
+  "references": [
+    {
+      "id": "WHS-ACT-2011-S18",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 18 - reasonably practicable",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-ACT-2011-S19",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2011-010",
+      "citation": "Work Health and Safety Act 2011 (NSW), s 19 - primary duty of care",
+      "effective_from": "2012-01-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-RISK-MGMT",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), risk management duties",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-HRCW",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), high risk construction work requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "WHS-REG-2025-SWMS",
+      "jurisdiction": "NSW",
+      "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/sl-2025-0440",
+      "citation": "Work Health and Safety Regulation 2025 (NSW), SWMS requirements",
+      "effective_from": "2025-09-01",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "Official NSW legislation current in-force page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSTRUCTION-WORK",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Construction work",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-MANAGE-WHS-RISKS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - How to manage work health and safety risks",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-FALLS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing the risk of falls at workplaces",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ELECTRICAL",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing electrical risks in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-PLANT",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of plant in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-HAZARDOUS-CHEMICALS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of hazardous chemicals in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-LEAD",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Managing risks of lead in the workplace",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-CONSULTATION",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW Code of Practice - Work health and safety consultation, cooperation and coordination",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    },
+    {
+      "id": "COP-ASBESTOS",
+      "jurisdiction": "NSW",
+      "source_url": "https://www.safework.nsw.gov.au/resource-library/codes-of-practice",
+      "citation": "SafeWork NSW asbestos codes of practice",
+      "effective_from": "current",
+      "effective_to": null,
+      "date_checked": "2026-07-05",
+      "checked_by_process": "SafeWork NSW codes of practice page",
+      "historical_mode_allowed": false
+    }
+  ]
+}

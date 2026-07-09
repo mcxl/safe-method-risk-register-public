@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/project-meta.schema.json",
+  "title": "Project Metadata",
+  "description": "Document-control header shared by the HRCW Register, Hold Point Schedule and Risk Register. Missing fields carry the literal placeholder '[Client To Confirm]' and the document still issues.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["project_name", "site_address", "principal_contractor", "jurisdiction", "revision", "issue_date"],
+  "properties": {
+    "project_name": { "type": "string" },
+    "site_address": { "type": "string" },
+    "principal_contractor": { "type": "string", "description": "Principal contractor / PCBU." },
+    "whs_consultant": { "type": "string", "description": "Preparing consultant. Use '[Client To Confirm]' if not yet assigned." },
+    "jurisdiction": {
+      "type": "string",
+      "default": "NSW",
+      "description": "Default NSW (WHS Act 2011 / WHS Regulation 2017). Any other state/territory must be expressly stated."
+    },
+    "document_ref": { "type": "string", "description": "e.g. PROJ-RA-XXXX-REV04." },
+    "revision": { "type": "string", "description": "Revision identifier (e.g. Rev04). Use '[Client To Confirm]' if not set." },
+    "issue_date": { "type": "string", "description": "ISO date or '[Client To Confirm]'." },
+    "review_date": { "type": "string" },
+    "methodology_sequence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Construction methodology mapped in sequence — established BEFORE HRCW triggers are assessed."
+    },
+    "trade_packages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Canonical package names. Single source of truth — every table's package names must match this list."
+    },
+    "interfaces_constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Key interfaces and constraints (public road, occupied strata, asset owners, adjacent trades)."
+    }
+  }
+}

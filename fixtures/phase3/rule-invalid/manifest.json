@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "source": "../../golden/document-sets/unitas-document-set.json",
+  "cases": [
+    {
+      "id": "conditional-trigger-without-condition",
+      "expected_rule_ids": ["CONTENT-007"],
+      "mutations": [{ "op": "delete", "path": ["hrcw_register", 3, "condition"] }]
+    },
+    {
+      "id": "yes-trigger-without-packages",
+      "expected_rule_ids": ["CONTENT-008"],
+      "mutations": [{ "op": "set", "path": ["hrcw_register", 0, "packages"], "value": [] }]
+    },
+    {
+      "id": "pc-approves-subcontractor-swms",
+      "expected_rule_ids": ["CONTENT-001"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["swms_matrix", 0, "reviewed_by"],
+          "value": "SD Group approves subcontractor SWMS before commencement"
+        }
+      ]
+    },
+    {
+      "id": "blanket-all-packages-without-justification",
+      "expected_rule_ids": ["CONTENT-002"],
+      "mutations": [
+        { "op": "set", "path": ["hrcw_register", 0, "blanket_all_packages"], "value": true },
+        { "op": "delete", "path": ["hrcw_register", 0, "blanket_justification"] }
+      ]
+    },
+    {
+      "id": "silica-rcs-alone-coded-h12",
+      "expected_rule_ids": ["CONTENT-003"],
+      "mutations": [
+        { "op": "set", "path": ["hrcw_register", 11, "risk_description"], "value": "Silica/RCS dust only." },
+        { "op": "set", "path": ["hrcw_register", 11, "condition"], "value": "Silica dust only." },
+        { "op": "set", "path": ["hrcw_register", 11, "notes"], "value": "RCS dust only." }
+      ]
+    },
+    {
+      "id": "h06-without-confirmed-assessment",
+      "expected_rule_ids": ["CONSISTENCY-007", "CONTENT-004"],
+      "mutations": [
+        { "op": "set", "path": ["hrcw_register", 5, "triggered"], "value": "YES" },
+        { "op": "set", "path": ["hrcw_register", 5, "trigger_status"], "value": "confirmed_hrcw" },
+        { "op": "set", "path": ["hrcw_register", 5, "swms_required"], "value": "YES" },
+        {
+          "op": "set",
+          "path": ["hrcw_register", 5, "packages"],
+          "value": ["Underground services installation"]
+        },
+        { "op": "delete", "path": ["hrcw_register", 5, "assessment_confirmed"] }
+      ]
+    },
+    {
+      "id": "invented-licence-terminology",
+      "expected_rule_ids": ["CONTENT-005"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "White card licence must be sighted before commencement and recorded by the site manager.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed-numeric-limit-without-basis",
+      "expected_rule_ids": ["CONTENT-006"],
+      "mutations": [
+        { "op": "delete", "path": ["risk_register", 3, "controls", 0, "fixed_numeric_limits"] }
+      ]
+    },
+    {
+      "id": "high-energy-low-admin-ppe-controls",
+      "expected_rule_ids": ["RISK-001"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": true },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["mobile_plant"] },
+        { "op": "set", "path": ["risk_register", 0, "residual_risk"], "value": "Low" },
+        { "op": "set", "path": ["risk_register", 0, "exclusion_or_segregation"], "value": true },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["plant-ped-separation"],
+            "text": "Site manager briefing recorded before the activity starts.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "crane-lift-below-medium",
+      "expected_rule_ids": ["RISK-002"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 24, "classification_tags"], "value": ["crane_lift"] },
+        { "op": "set", "path": ["risk_register", 24, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 24, "fall_arrest_reliant"], "value": false },
+        { "op": "set", "path": ["risk_register", 24, "residual_risk"], "value": "Low" }
+      ]
+    },
+    {
+      "id": "height-or-large-public-interface-below-medium",
+      "expected_rule_ids": ["RISK-003"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "classification_tags"],
+          "value": ["large_public_or_occupied_interface"]
+        },
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "residual_risk"], "value": "Low" }
+      ]
+    },
+    {
+      "id": "fall-arrest-row-without-rescue-readiness",
+      "expected_rule_ids": ["RISK-005"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 17, "fall_arrest_reliant"], "value": true },
+        { "op": "set", "path": ["risk_register", 17, "residual_risk"], "value": "Medium" },
+        { "op": "delete", "path": ["risk_register", 17, "rescue_readiness"] }
+      ]
+    },
+    {
+      "id": "structural-access-risk-without-engineering-release",
+      "expected_rule_ids": ["RISK-004"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "classification_tags"],
+          "value": ["engineering_release_required"]
+        },
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "hold_points"], "value": [] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Work area reviewed by the supervisor before the activity starts.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "missing-segregation-exclusion-control",
+      "expected_rule_ids": ["RISK-006"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": true },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["mobile_plant"] },
+        { "op": "set", "path": ["risk_register", 0, "exclusion_or_segregation"], "value": false },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["plant-ped-separation"],
+            "text": "Supervisor checks the work sequence before the plant activity starts.",
+            "levels": ["engineering"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "package-spelling-mismatch",
+      "expected_rule_ids": ["CONSISTENCY-001"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "trade_package"], "value": "Site Establishment" }
+      ]
+    },
+    {
+      "id": "hrcw-ref-mismatch",
+      "expected_rule_ids": ["CONSISTENCY-002", "CONSISTENCY-007"],
+      "mutations": [{ "op": "set", "path": ["swms_matrix", 0, "hrcw_refs"], "value": ["H02"] }]
+    },
+    {
+      "id": "swms-title-mismatch",
+      "expected_rule_ids": ["CONSISTENCY-005"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "swms_title"], "value": "Wrong SWMS Title" }
+      ]
+    },
+    {
+      "id": "hold-point-ref-count-mismatch",
+      "expected_rule_ids": ["CONSISTENCY-003"],
+      "mutations": [{ "op": "set", "path": ["swms_matrix", 2, "hold_points"], "value": ["HP-99"] }]
+    },
+    {
+      "id": "hold-point-wording-mismatch",
+      "expected_rule_ids": ["CONSISTENCY-004"],
+      "mutations": [
+        { "op": "set", "path": ["swms_matrix", 2, "hold_point_notes"], "value": "HP-02 unrelated stop." }
+      ]
+    },
+    {
+      "id": "duplicate-risk-ref-different-hazard",
+      "expected_rule_ids": ["CONSISTENCY-006"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 1, "ref"], "value": "SE-01" },
+        { "op": "set", "path": ["risk_register", 1, "hazard"], "value": "Different unrelated hazard" }
+      ]
+    },
+    {
+      "id": "weak-control-use-safe-work-practices",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Use safe work practices.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "weak-control-ensure-awareness",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Ensure awareness before the task.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "weak-control-bare-wear-ppe",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Wear PPE.",
+            "levels": ["ppe"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "weak-control-follow-swms",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Follow SWMS.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "weak-control-use-trained-workers",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Use trained workers.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "weak-control-monitor-conditions",
+      "expected_rule_ids": ["CONTENT-009"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "high_energy"], "value": false },
+        { "op": "set", "path": ["risk_register", 0, "classification_tags"], "value": ["other"] },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0],
+          "value": {
+            "source_ids": ["traffic-management-plan"],
+            "text": "Monitor conditions.",
+            "levels": ["administrative"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "swms-criterion-1-project-specificity",
+      "expected_rule_ids": ["SWMS-001"],
+      "expected_criterion_number": 1,
+      "mutations": [
+        { "op": "set", "path": ["swms_benchmark_reviews", 0, "criteria_evidence", "project_specificity"], "value": "" }
+      ]
+    },
+    {
+      "id": "swms-criterion-2-hazard-identification",
+      "expected_rule_ids": ["SWMS-002"],
+      "expected_criterion_number": 2,
+      "mutations": [
+        { "op": "set", "path": ["swms_benchmark_reviews", 0, "criteria_evidence", "hazard_identification"], "value": "" }
+      ]
+    },
+    {
+      "id": "swms-criterion-3-control-adequacy",
+      "expected_rule_ids": ["SWMS-003"],
+      "expected_criterion_number": 3,
+      "mutations": [
+        { "op": "set", "path": ["swms_benchmark_reviews", 0, "criteria_evidence", "control_adequacy"], "value": "" }
+      ]
+    },
+    {
+      "id": "swms-criterion-4-hold-points",
+      "expected_rule_ids": ["SWMS-004"],
+      "expected_criterion_number": 4,
+      "mutations": [
+        { "op": "set", "path": ["swms_benchmark_reviews", 0, "criteria_evidence", "hold_points_named_stops"], "value": "" }
+      ]
+    },
+    {
+      "id": "swms-criterion-5-responsibility",
+      "expected_rule_ids": ["SWMS-005"],
+      "expected_criterion_number": 5,
+      "mutations": [
+        { "op": "set", "path": ["swms_benchmark_reviews", 0, "criteria_evidence", "named_role_responsibility"], "value": "" }
+      ]
+    },
+    {
+      "id": "conditional-hrcw-in-confirmed-swms-refs",
+      "expected_rule_ids": ["CONSISTENCY-007"],
+      "mutations": [
+        { "op": "set", "path": ["swms_matrix", 0, "hrcw_refs"], "value": ["H04"] },
+        { "op": "set", "path": ["swms_matrix", 0, "conditional_hrcw_refs"], "value": [] }
+      ]
+    },
+    {
+      "id": "confirmed-hrcw-without-source-fact-final",
+      "expected_rule_ids": ["CONTENT-010"],
+      "options": { "mode": "final" },
+      "mutations": [
+        { "op": "delete", "path": ["hrcw_register", 0, "source_fact_refs"] }
+      ]
+    },
+    {
+      "id": "supporting-document-listed-as-swms",
+      "expected_rule_ids": ["CONTENT-011"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["supporting_documents"],
+          "value": [
+            {
+              "id": "ssmp",
+              "title": "Site Establishment and Traffic Management SWMS",
+              "status": "required_before_mobilisation",
+              "description": "Supporting document only."
+            }
+          ]
+        },
+        { "op": "set", "path": ["intended_swms"], "value": [] }
+      ]
+    },
+    {
+      "id": "confirmed-hold-point-without-release-criteria",
+      "expected_rule_ids": ["CONSISTENCY-008"],
+      "mutations": [
+        { "op": "set", "path": ["hold_point_schedule", 0, "release_criteria"], "value": "" }
+      ]
+    },
+    {
+      "id": "blocking-confirmation-open-final",
+      "expected_rule_ids": ["CONTENT-014"],
+      "options": { "mode": "final" },
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["confirmation_items"],
+          "value": [
+            {
+              "id": "pcbu-details",
+              "title": "PCBU details confirmed",
+              "status": "open",
+              "blocking_level": "blocks_issue_ready",
+              "owner_role": "Principal contractor",
+              "evidence_required": "Access method evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "excluded-scope-has-active-control",
+      "expected_rule_ids": ["CONTENT-015"],
+      "mutations": [
+        { "op": "set", "path": ["risk_register", 0, "scope_status"], "value": "excluded_scope" },
+        { "op": "set", "path": ["risk_register", 0, "swms_title"], "value": "—" }
+      ]
+    },
+    {
+      "id": "stale-legal-reference-current-output",
+      "expected_rule_ids": ["CONTENT-017"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["legal_references", 0, "citation"],
+          "value": "Work Health and Safety Regulation 2017 (NSW), r 291"
+        }
+      ]
+    },
+    {
+      "id": "access-method-unknown-active-ewp-control",
+      "expected_rule_ids": ["RISK-007"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["confirmation_items"],
+          "value": [
+            {
+              "id": "access-method",
+              "title": "Access method confirmed",
+              "status": "open",
+              "blocking_level": "blocks_issue_ready",
+              "owner_role": "Principal contractor",
+              "evidence_required": "Access method evidence."
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "controls", 0, "text"],
+          "value": "EWP platform controls confirmed before the access method is known."
+        },
+        { "op": "set", "path": ["risk_register", 0, "controls", 0, "control_status"], "value": "active_control" }
+      ]
+    },
+    {
+      "id": "waterproofing-active-from-defect-language",
+      "expected_rule_ids": ["CONTENT-016"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["risk_register", 0, "activity"],
+          "value": "Waterproofing defect from ponding or moisture identified"
+        },
+        { "op": "set", "path": ["risk_register", 0, "scope_status"], "value": "in_scope" },
+        { "op": "delete", "path": ["risk_register", 0, "source_fact_refs"] }
+      ]
+    }
+  ]
+}

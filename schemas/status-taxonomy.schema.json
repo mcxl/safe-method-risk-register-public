@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safemethod.app/schemas/status-taxonomy.schema.json",
+  "title": "Conditional Risk Status Taxonomy",
+  "description": "Shared status enums for the conditional-risk control upgrade. These values are fixed so schema and deterministic validators can reject drift.",
+  "$defs": {
+    "hrcw_status": {
+      "type": "string",
+      "enum": [
+        "confirmed_hrcw",
+        "conditional_hrcw",
+        "not_triggered",
+        "stop_work_only",
+        "requires_confirmation"
+      ]
+    },
+    "risk_status": {
+      "type": "string",
+      "enum": [
+        "confirmed_risk",
+        "conditional_risk",
+        "latent_condition",
+        "not_applicable",
+        "scope_exclusion"
+      ]
+    },
+    "scope_status": {
+      "type": "string",
+      "enum": [
+        "in_scope",
+        "conditional_scope",
+        "excluded_scope",
+        "stop_work_referral_only"
+      ]
+    },
+    "hold_point_status": {
+      "type": "string",
+      "enum": [
+        "confirmed_hold_point",
+        "conditional_hold_point",
+        "pre_mobilisation_blocker",
+        "pre_task_blocker",
+        "swms_update_trigger",
+        "stop_work_trigger"
+      ]
+    },
+    "supporting_document_status": {
+      "type": "string",
+      "enum": [
+        "required_before_issue",
+        "required_before_mobilisation",
+        "required_before_task",
+        "conditional_if_triggered",
+        "for_information"
+      ]
+    },
+    "control_status": {
+      "type": "string",
+      "enum": [
+        "active_control",
+        "conditional_control",
+        "stop_work_control",
+        "supporting_document_control",
+        "not_applicable_control"
+      ]
+    },
+    "confirmation_status": {
+      "type": "string",
+      "enum": ["open", "confirmed", "not_required", "superseded"]
+    },
+    "blocking_level": {
+      "type": "string",
+      "enum": [
+        "blocks_issue_ready",
+        "blocks_mobilisation",
+        "blocks_specific_task",
+        "blocks_swms_update",
+        "advisory_only"
+      ]
+    }
+  }
+}

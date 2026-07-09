@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "../../golden/document-sets/unitas-document-set.json",
+  "source": "../../golden/document-sets/sample-document-set.json",
   "cases": [
     {
       "id": "conditional-trigger-without-condition",

@@ -5,7 +5,7 @@ import { deriveVerdict, loadDocumentSet, validateDocumentSet } from "./index.mjs
 
 export const PHASE3_RULE_FIXTURE_MANIFEST = "fixtures/phase3/rule-invalid/manifest.json";
 export const PHASE3_VERDICT_FIXTURES = "fixtures/phase3/verdict-cases.json";
-export const GOLDEN_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+export const GOLDEN_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
 export function readJson(relativePath) {
   return JSON.parse(readFileSync(path.resolve(relativePath), "utf8"));

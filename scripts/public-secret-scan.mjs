@@ -32,6 +32,14 @@ const SECRET_PATTERNS = [
   { id: "sendgrid-key", pattern: /\bSG\.[A-Za-z0-9_-]{16,}\.[A-Za-z0-9_-]{16,}\b/u },
 ];
 
+const PRIVATE_BENCHMARK_TERMS = [
+  { id: "private-benchmark-name", term: ["Uni", "tas"].join("") },
+  { id: "private-benchmark-name", term: ["Pad", "ding", "ton"].join("") },
+  { id: "private-benchmark-name", term: ["R", "P", "D"].join("") },
+  { id: "private-site-name", term: ["Coo", "gee"].join("") },
+  { id: "private-site-name", term: ["75 ", "Mount"].join("") },
+];
+
 const findings = [];
 
 for await (const filePath of walk(ROOT)) {
@@ -59,6 +67,13 @@ for await (const filePath of walk(ROOT)) {
   for (const { id, pattern } of SECRET_PATTERNS) {
     if (pattern.test(text)) {
       findings.push({ type: "secret-pattern", id, file: relativePath });
+    }
+  }
+
+  for (const { id, term } of PRIVATE_BENCHMARK_TERMS) {
+    const pattern = new RegExp(`\\b${escapeRegExp(term)}\\b`, "iu");
+    if (pattern.test(text)) {
+      findings.push({ type: "private-benchmark-pattern", id, file: relativePath });
     }
   }
 }
@@ -94,4 +109,8 @@ async function readTextIfPossible(filePath) {
 
 function toRepoPath(filePath) {
   return path.relative(ROOT, filePath).replace(/\\/gu, "/");
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }

@@ -9,17 +9,17 @@ import {
 import { assertDocumentSetRenderable } from "../render/docx-renderer.mjs";
 import { canonicalClone, readJson, REPO_ROOT } from "./kb-source.mjs";
 
-const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
 const failures = [];
 
 await runCheck(
-  "sectioned fixture generation assembles and validates the Unitas document set",
+  "sectioned fixture generation assembles and validates the Sample document set",
   async () => {
-    const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const result = await runSectionedGenerationPipeline({
-      briefPath: UNITAS_BRIEF,
+      briefPath: SAMPLE_BRIEF,
       maxRetries: 0,
     });
 
@@ -57,7 +57,7 @@ await runCheck(
 
 await runCheck("malformed section output fails closed with section evidence", async () => {
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: fixedSectionProvider("{not json"),
     maxRetries: 0,
   });
@@ -68,7 +68,7 @@ await runCheck("malformed section output fails closed with section evidence", as
 
 await runCheck("missing section payload fails closed with section evidence", async () => {
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: fixedSectionProvider({ section_name: "hrcw_register" }),
     maxRetries: 0,
   });
@@ -78,9 +78,9 @@ await runCheck("missing section payload fails closed with section evidence", asy
 });
 
 await runCheck("extra top-level section key fails closed with section evidence", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: fixedSectionProvider({
       section_name: "hrcw_register",
       hrcw_register: golden.hrcw_register,
@@ -94,9 +94,9 @@ await runCheck("extra top-level section key fails closed with section evidence",
 });
 
 await runCheck("wrong section name fails closed with section evidence", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: fixedSectionProvider({
       section_name: "risk_register",
       hrcw_register: golden.hrcw_register,
@@ -109,7 +109,7 @@ await runCheck("wrong section name fails closed with section evidence", async ()
 });
 
 await runCheck("support bundle cannot invent legal references", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = {
     provider_name: "sectioned-legal-mismatch-fixture",
     model: "fixture:sectioned-legal-mismatch",
@@ -133,7 +133,7 @@ await runCheck("support bundle cannot invent legal references", async () => {
   };
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
   });
@@ -143,7 +143,7 @@ await runCheck("support bundle cannot invent legal references", async () => {
 });
 
 await runCheck("assembled deterministic rule failure can be corrected within bound", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = {
     provider_name: "sectioned-rule-correction-fixture",
     model: "fixture:sectioned-rule-correction",
@@ -158,7 +158,7 @@ await runCheck("assembled deterministic rule failure can be corrected within bou
   };
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,
@@ -172,9 +172,9 @@ await runCheck("assembled deterministic rule failure can be corrected within bou
 });
 
 await runCheck("risk chunk source_ids are repaired by section retry before assembly", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: riskSourceIdRetryProvider(golden),
     maxRetries: 0,
     sectionMaxRetries: {
@@ -198,10 +198,10 @@ await runCheck("risk chunk source_ids are repaired by section retry before assem
 });
 
 await runCheck("targeted rule feedback corrections clear live-style rule failures", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = liveRuleFeedbackCorrectionProvider(golden);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,
@@ -222,10 +222,10 @@ await runCheck("targeted rule feedback corrections clear live-style rule failure
 });
 
 await runCheck("isolated RISK-007 correction preserves open confirmation and passes", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = isolatedRisk007CorrectionProvider(golden);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,

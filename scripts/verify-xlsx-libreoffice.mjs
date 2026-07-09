@@ -6,7 +6,7 @@ import { REPO_ROOT } from "./kb-source.mjs";
 import {
   cleanDirectory,
   recalculateWithLibreOffice,
-  renderUnitasXlsx,
+  renderSampleXlsx,
 } from "./xlsx-verification-utils.mjs";
 
 const OUTPUT_DIR = path.join(REPO_ROOT, "outputs", "tmp", "phase5b-libreoffice");
@@ -14,7 +14,7 @@ const RECALC_DIR = path.join(OUTPUT_DIR, "recalculated");
 const PROFILE_DIR = path.join(OUTPUT_DIR, ".lo-profile");
 
 await cleanDirectory(OUTPUT_DIR);
-const { outputXlsx } = await renderUnitasXlsx(OUTPUT_DIR);
+const { outputXlsx } = await renderSampleXlsx(OUTPUT_DIR);
 const recalc = await recalculateWithLibreOffice(outputXlsx, RECALC_DIR, PROFILE_DIR);
 const scan = await scanRecalculatedXlsxValues(recalc.recalculatedPath);
 

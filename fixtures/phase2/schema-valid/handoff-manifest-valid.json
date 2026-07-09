@@ -4,8 +4,8 @@
   "output_mode": "draft",
   "issue_ready": false,
   "document": {
-    "project_name": "Unitas Business Park",
-    "document_ref": "PROJ-RA-UNITAS-REV04",
+    "project_name": "Sample Business Park",
+    "document_ref": "PROJ-RA-SAMPLE-REV04",
     "revision": "Rev04",
     "issue_date": "24 March 2026",
     "date_stamp": {
@@ -15,15 +15,15 @@
   },
   "handoff": {
     "recipients": ["[Client To Confirm]"],
-    "subject": "Safe Method Risk Register DRAFT handoff - PROJ-RA-UNITAS-REV04"
+    "subject": "Safe Method Risk Register DRAFT handoff - PROJ-RA-SAMPLE-REV04"
   },
   "output": {
     "exists": true,
-    "expected_file_name": "proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
-    "file_name": "proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "expected_file_name": "proj-ra-sample-rev04-draft-whs-control-document-set.docx",
+    "file_name": "proj-ra-sample-rev04-draft-whs-control-document-set.docx",
     "extension": "docx",
-    "relative_path": "outputs/phase5a/proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
-    "absolute_path": "C:/workspace/outputs/phase5a/proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "relative_path": "outputs/phase5a/proj-ra-sample-rev04-draft-whs-control-document-set.docx",
+    "absolute_path": "C:/workspace/outputs/phase5a/proj-ra-sample-rev04-draft-whs-control-document-set.docx",
     "bytes": 1234,
     "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
@@ -31,8 +31,8 @@
     {
       "role": "document_set",
       "label": "Document set JSON",
-      "relative_path": "fixtures/golden/document-sets/unitas-document-set.json",
-      "absolute_path": "C:/workspace/fixtures/golden/document-sets/unitas-document-set.json",
+      "relative_path": "fixtures/golden/document-sets/sample-document-set.json",
+      "absolute_path": "C:/workspace/fixtures/golden/document-sets/sample-document-set.json",
       "exists": true,
       "bytes": 1234,
       "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"

@@ -9,7 +9,7 @@ import { buildOutputFileName } from "../app/handoff-manifest.mjs";
 import { renderDraftDocx } from "../render/docx-renderer.mjs";
 import { readJson, REPO_ROOT } from "./kb-source.mjs";
 
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 const OUTPUT_DIR = path.join(REPO_ROOT, "outputs", "tmp", "phase5a-visual");
 const RENDER_DIR = path.join(OUTPUT_DIR, "libreoffice-pdf");
 const PROFILE_DIR = path.join(OUTPUT_DIR, ".lo-profile");
@@ -18,7 +18,7 @@ await rm(OUTPUT_DIR, { recursive: true, force: true });
 await mkdir(RENDER_DIR, { recursive: true });
 await mkdir(PROFILE_DIR, { recursive: true });
 
-const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
 const outputFileName = buildOutputFileName(documentSet, { mode: "draft" });
 const outputDocx = path.join(OUTPUT_DIR, outputFileName);
 const renderResult = await renderDraftDocx(documentSet, outputDocx, { filename: outputFileName });

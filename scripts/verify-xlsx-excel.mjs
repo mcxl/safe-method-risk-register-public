@@ -5,7 +5,7 @@ import path from "node:path";
 
 import { scanRecalculatedXlsxValues } from "../render/xlsx-renderer.mjs";
 import { REPO_ROOT } from "./kb-source.mjs";
-import { cleanDirectory, renderUnitasXlsx } from "./xlsx-verification-utils.mjs";
+import { cleanDirectory, renderSampleXlsx } from "./xlsx-verification-utils.mjs";
 
 if (process.platform !== "win32") {
   throw new Error(
@@ -18,7 +18,7 @@ const EXCEL_DIR = path.join(OUTPUT_DIR, "excel-recalculated");
 await cleanDirectory(OUTPUT_DIR);
 await mkdir(EXCEL_DIR, { recursive: true });
 
-const { outputXlsx, outputFileName } = await renderUnitasXlsx(OUTPUT_DIR);
+const { outputXlsx, outputFileName } = await renderSampleXlsx(OUTPUT_DIR);
 const excelPath = path.join(EXCEL_DIR, outputFileName);
 await copyFile(outputXlsx, excelPath);
 

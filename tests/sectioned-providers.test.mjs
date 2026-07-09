@@ -30,7 +30,7 @@ import { runCodexAssistedPrepare } from "../scripts/generate-sectioned-codex-ass
 import { canonicalClone, REPO_ROOT } from "../scripts/kb-source.mjs";
 import {
   assertNoRendererOutput,
-  buildUnitasContext,
+  buildSampleContext,
   cleanupCodexAssistedTestRuns,
   createCodexAssistedRun,
   TEST_RUN_ROOT,
@@ -115,7 +115,7 @@ test("OpenAI provider request uses Responses structured output format", () => {
 });
 
 test("OpenAI-style structured response parses into the same section envelope contract", async () => {
-  const { golden } = await buildUnitasContext();
+  const { golden } = await buildSampleContext();
   const envelope = buildSectionEnvelopeFromDocumentSet("swms_matrix", golden);
   const openAiParsed = parseOpenAISectionResponse({
     status: "completed",
@@ -172,7 +172,7 @@ test("OpenAI response failures fail closed with compact secret-safe errors", asy
     /not valid JSON/u,
   );
   assert.equal(
-    redactSecrets(`bad sk-${"secret-value"} sk-ant-${"secret-value"}`),
+    redactSecrets("bad test-provider-key-redacted test-provider-key-redacted"),
     "bad [redacted] [redacted]",
   );
 
@@ -181,11 +181,14 @@ test("OpenAI response failures fail closed with compact secret-safe errors", asy
     ok: false,
     status: 400,
     async text() {
-      return `provider rejected sk-${"secret-value"}`;
+      return "provider rejected test-provider-key-redacted";
     },
   });
   try {
-    const provider = createOpenAIProvider({ apiKey: `sk-${"secret-value"}`, model: "gpt-test" });
+    const provider = createOpenAIProvider({
+      apiKey: "test-provider-key-redacted",
+      model: "gpt-test",
+    });
     assert.equal(provider.provider_contract_version, SECTIONED_PROVIDER_CONTRACT_VERSION);
     await assert.rejects(
       () =>
@@ -202,7 +205,7 @@ test("OpenAI response failures fail closed with compact secret-safe errors", asy
       (error) =>
         /OpenAI API 400/u.test(error.message) &&
         /\[redacted\]/u.test(error.message) &&
-        !new RegExp(`sk-${"secret-value"}`, "u").test(error.message),
+        !/test-provider-key-redacted/u.test(error.message),
     );
   } finally {
     globalThis.fetch = originalFetch;
@@ -210,7 +213,7 @@ test("OpenAI response failures fail closed with compact secret-safe errors", asy
 });
 
 test("Codex-assisted golden local sections assemble to the exact full document set", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("golden-assembly", context);
   const provider = await createCodexAssistedSectionProvider({
     root: REPO_ROOT,
@@ -247,7 +250,7 @@ test("Codex-assisted golden local sections assemble to the exact full document s
 });
 
 test("Codex-assisted manifest hash mismatch fails closed as stale", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("stale-hash", context);
   const manifestPath = path.join(run.runDirectory, CODEX_ASSISTED_MANIFEST_FILE);
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
@@ -267,7 +270,7 @@ test("Codex-assisted manifest hash mismatch fails closed as stale", async () => 
 });
 
 test("Codex-assisted context hash mismatch fails closed as stale", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("stale-context-hash", context);
   const manifestPath = path.join(run.runDirectory, CODEX_ASSISTED_MANIFEST_FILE);
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
@@ -287,7 +290,7 @@ test("Codex-assisted context hash mismatch fails closed as stale", async () => {
 });
 
 test("Codex-assisted expected section filenames mismatch fails closed as stale", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("stale-expected-files", context);
   const manifestPath = path.join(run.runDirectory, CODEX_ASSISTED_MANIFEST_FILE);
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
@@ -309,7 +312,7 @@ test("Codex-assisted expected section filenames mismatch fails closed as stale",
 });
 
 test("Codex-assisted manifest with extra section entries fails closed as stale", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("stale-section-list", context);
   const manifestPath = path.join(run.runDirectory, CODEX_ASSISTED_MANIFEST_FILE);
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
@@ -332,7 +335,7 @@ test("Codex-assisted manifest with extra section entries fails closed as stale",
 });
 
 test("Codex-assisted prepare and lock keep manifest state explicit", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const preparedRunDirectory = path.join(TEST_RUN_ROOT, "prepare-command");
   const prepared = await runCodexAssistedPrepare({
     root: REPO_ROOT,
@@ -374,7 +377,7 @@ test("Codex-assisted prepare and lock keep manifest state explicit", async () =>
 });
 
 test("Codex-assisted missing section file fails closed", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("missing-file", context);
   await unlink(path.join(run.runDirectory, "support_bundle.json"));
 
@@ -391,7 +394,7 @@ test("Codex-assisted missing section file fails closed", async () => {
 });
 
 test("Codex-assisted malformed JSON fails closed without renderer output", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("malformed-json", context, {
     overrides: {
       hrcw_register: "{not json",
@@ -412,7 +415,7 @@ test("Codex-assisted malformed JSON fails closed without renderer output", async
 });
 
 test("Codex-assisted wrong section_name and schema-invalid sections fail closed", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const wrongSectionRun = await createCodexAssistedRun("wrong-section", context, {
     overrides: {
       hrcw_register: {
@@ -453,7 +456,7 @@ test("Codex-assisted wrong section_name and schema-invalid sections fail closed"
 });
 
 test("Codex-assisted lock rejects schema-invalid local section files", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const invalidEnvelope = canonicalClone(
     buildSectionEnvelopeFromDocumentSet("hrcw_register", context.golden),
   );
@@ -478,7 +481,7 @@ test("Codex-assisted lock rejects schema-invalid local section files", async () 
 });
 
 test("Codex-assisted passing assembly writes only ignored DRAFT evidence", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createCodexAssistedRun("draft-evidence", context);
   const outcome = await runCodexAssistedAssemble({
     root: REPO_ROOT,

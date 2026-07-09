@@ -12,7 +12,7 @@ const goldenDocumentSetPath = path.join(
   "fixtures",
   "golden",
   "document-sets",
-  "unitas-document-set.json",
+  "sample-document-set.json",
 );
 const goldenBriefsDirectory = path.join(REPO_ROOT, "fixtures", "golden", "briefs");
 
@@ -161,10 +161,10 @@ if (existsSync(goldenDocumentSetPath)) {
       );
     }
   }
-  console.log("PASS golden Unitas document-set row counts match the Rev04 masters");
+  console.log("PASS golden Sample document-set row counts match the Rev04 masters");
 } else {
   console.log(
-    "PENDING fixtures/golden/document-sets/unitas-document-set.json is required before Phase 2 can be green",
+    "PENDING fixtures/golden/document-sets/sample-document-set.json is required before Phase 2 can be green",
   );
 }
 

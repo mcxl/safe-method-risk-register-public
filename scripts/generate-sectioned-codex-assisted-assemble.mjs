@@ -10,7 +10,7 @@ import {
 } from "../generate/sectioned-providers.mjs";
 import { buildKnowledgeSnapshot, REPO_ROOT } from "./kb-source.mjs";
 
-export const DEFAULT_CODEX_ASSISTED_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
+export const DEFAULT_CODEX_ASSISTED_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
 
 export async function buildCodexAssistedGenerationContext(options = {}) {
   const root = options.root ?? REPO_ROOT;

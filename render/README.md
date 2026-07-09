@@ -32,7 +32,7 @@ Run the local DOCX gate with:
 npm run verify:docx
 ```
 
-The structural gate renders the Unitas golden document-set into
+The structural gate renders the Sample golden document-set into
 `outputs/tmp/phase5a/`, checks the OOXML contract, validates the handoff manifest
 and confirms draft-only preflight status. Visual/open QA is intentionally separate:
 run `npm run verify:docx:visual` when LibreOffice/`soffice` is available. That gate

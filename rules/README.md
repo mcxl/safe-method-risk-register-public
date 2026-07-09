@@ -44,7 +44,7 @@ Run:
 npm run verify:rules
 ```
 
-The gate validates the golden Unitas document set as `Benchmark Quality Confirmed`,
+The gate validates the golden Sample document set as `Benchmark Quality Confirmed`,
 checks each Phase 3 broken fixture against its expected rule ID, verifies each SWMS
 criterion number, proves equivalent-or-stronger control evidence passes criterion 3, and
 covers all four verdict ratings.

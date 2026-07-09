@@ -27,18 +27,18 @@ import {
   sha256Canonical,
 } from "../scripts/kb-source.mjs";
 
-const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
-const CONDITIONAL_RISK_BRIEF = "fixtures/golden/briefs/conditional-risk-project-brief.json";
-const CONDITIONAL_RISK_DOCUMENT_SET =
-  "fixtures/golden/document-sets/conditional-risk-document-set.json";
+const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
+const CONDITIONAL_SAMPLE_BRIEF = "fixtures/golden/briefs/conditional-sample-project-brief.json";
+const CONDITIONAL_SAMPLE_DOCUMENT_SET =
+  "fixtures/golden/document-sets/conditional-sample-document-set.json";
 
 test("Phase 4 project brief validates and normalises package aliases", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
 
-  assert.equal(normalised.brief_id, "unitas-canonical-project-brief");
+  assert.equal(normalised.brief_id, "sample-canonical-project-brief");
   assert.equal(normalised.project.trade_packages.length, 20);
   assert.deepEqual(
     normalised.package_mappings.find((mapping) => mapping.input_name === "Piling"),
@@ -50,9 +50,9 @@ test("Phase 4 project brief validates and normalises package aliases", async () 
   );
 });
 
-test("Phase 4 retrieval packet matches the Unitas fixture expectations", async () => {
+test("Phase 4 retrieval packet matches the Sample fixture expectations", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const packet = await buildRetrievalPacket(normalised, { snapshot });
 
@@ -62,7 +62,7 @@ test("Phase 4 retrieval packet matches the Unitas fixture expectations", async (
 
 test("fixture-backed generation validates schemas, rules and provenance without network", async () => {
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createFixtureProvider(),
     maxRetries: 0,
   });
@@ -75,10 +75,10 @@ test("fixture-backed generation validates schemas, rules and provenance without 
   assert.deepEqual(findUnseededControlSourceIds(result.documentSet, result.retrievalPacket), []);
 });
 
-test("conditional-risk fixture preserves conditional HRCW and control status", async () => {
+test("Conditional Sample fixture preserves conditional HRCW and control status", async () => {
   const result = await runGenerationPipeline({
-    briefPath: CONDITIONAL_RISK_BRIEF,
-    provider: createFixtureProvider({ fixturePath: CONDITIONAL_RISK_DOCUMENT_SET }),
+    briefPath: CONDITIONAL_SAMPLE_BRIEF,
+    provider: createFixtureProvider({ fixturePath: CONDITIONAL_SAMPLE_DOCUMENT_SET }),
     maxRetries: 0,
   });
 
@@ -96,7 +96,7 @@ test("conditional-risk fixture preserves conditional HRCW and control status", a
 });
 
 test("confirmed confirmation item applies transition effects audibly", async () => {
-  const documentSet = await readJson(REPO_ROOT, CONDITIONAL_RISK_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, CONDITIONAL_SAMPLE_DOCUMENT_SET);
   const confirmed = canonicalClone(documentSet);
   const item = confirmed.confirmation_items.find(
     (candidate) => candidate.id === "ewp-mobile-plant-status",
@@ -119,13 +119,13 @@ test("confirmed confirmation item applies transition effects audibly", async () 
 });
 
 test("generation retries once when the first structured response is schema-invalid", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const invalid = canonicalClone(golden);
   delete invalid.hrcw_register;
   const provider = createSequenceProvider([invalid, golden]);
 
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 1,
   });
@@ -152,7 +152,7 @@ test("provider failure reports include fetch cause diagnostics", async () => {
   };
 
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
   });
@@ -168,7 +168,7 @@ test("provider failure reports include fetch cause diagnostics", async () => {
 
 test("generation request uses Anthropic native structured output config", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   const request = await buildGenerationRequest({
@@ -183,7 +183,7 @@ test("generation request uses Anthropic native structured output config", async 
 
 test("generation request can use the live smoke output schema", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   const outputSchema = buildDocumentSetSmokeOutputSchema();
@@ -210,7 +210,7 @@ test("generation request can use the live smoke output schema", async () => {
 test("generation provenance hashes the output schema used for the request", async () => {
   const outputSchema = buildDocumentSetSmokeOutputSchema();
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createFixtureProvider(),
     outputSchema,
     maxRetries: 0,
@@ -224,7 +224,7 @@ test("generation provenance hashes the output schema used for the request", asyn
 });
 
 test("wrapped live smoke provider responses are parsed before full validation", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const wrapped = {
     document_set_json: JSON.stringify(golden),
   };
@@ -232,7 +232,7 @@ test("wrapped live smoke provider responses are parsed before full validation", 
   assert.deepEqual(parseProviderResponse(wrapped), golden);
 
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createSequenceProvider([wrapped], { providerName: "wrapped-fixture" }),
     outputSchema: buildDocumentSetSmokeOutputSchema(),
     maxRetries: 0,

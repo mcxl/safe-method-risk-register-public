@@ -31,7 +31,7 @@ arguments directly after it; `npm-pinned.ps1` inserts npm's `--` separator inter
 when arguments are present. Do not pass a literal `--` to the PowerShell wrapper.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:local:draft --run-id "unitas-local-001" --verify targeted
+powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:local:draft --run-id "sample-local-001" --verify targeted
 ```
 
 If the npm script takes no arguments, omit the separator:
@@ -49,7 +49,7 @@ claiming final or issue-ready status.
 Use explicit arguments for repeatable handoff runs:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:local:draft --brief "fixtures\golden\briefs\unitas-project-brief.json" --run-id "unitas-local-001" --project-slug "unitas" --output-dir "outputs\tmp\codex-assisted\unitas-local-001\draft" --verify targeted
+powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:local:draft --brief "fixtures\golden\briefs\sample-project-brief.json" --run-id "sample-local-001" --project-slug "sample" --output-dir "outputs\tmp\codex-assisted\sample-local-001\draft" --verify targeted
 ```
 
 For local operation, the command also accepts environment fallbacks. Explicit CLI
@@ -65,10 +65,10 @@ arguments take precedence over environment variables.
 Environment-based example:
 
 ```powershell
-$env:SAFE_METHOD_PROJECT_BRIEF = "fixtures\golden\briefs\unitas-project-brief.json"
-$env:SAFE_METHOD_CODEX_ASSISTED_RUN_ID = "unitas-local-001"
-$env:SAFE_METHOD_PROJECT_SLUG = "unitas"
-$env:SAFE_METHOD_OUTPUT_DIR = "outputs\tmp\codex-assisted\unitas-local-001\draft"
+$env:SAFE_METHOD_PROJECT_BRIEF = "fixtures\golden\briefs\sample-project-brief.json"
+$env:SAFE_METHOD_CODEX_ASSISTED_RUN_ID = "sample-local-001"
+$env:SAFE_METHOD_PROJECT_SLUG = "sample"
+$env:SAFE_METHOD_OUTPUT_DIR = "outputs\tmp\codex-assisted\sample-local-001\draft"
 powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:local:draft --verify targeted
 ```
 
@@ -157,7 +157,7 @@ Choose a deterministic run id or an explicit run directory. The repo does not in
 ids from the clock.
 
 ```powershell
-$env:SAFE_METHOD_CODEX_ASSISTED_RUN_ID = "unitas-local-001"
+$env:SAFE_METHOD_CODEX_ASSISTED_RUN_ID = "sample-local-001"
 powershell -ExecutionPolicy Bypass -File "scripts\npm-pinned.ps1" generate:sectioned:codex-assisted:prepare
 ```
 

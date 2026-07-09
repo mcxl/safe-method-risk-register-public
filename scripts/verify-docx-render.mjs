@@ -14,17 +14,17 @@ import { assertPhase5aDocx } from "../render/ooxml-assertions.mjs";
 import { readJson, REPO_ROOT } from "./kb-source.mjs";
 import { createAjvRegistry, formatAjvErrors } from "./schema-registry.mjs";
 
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 const OUTPUT_DIR = path.join(REPO_ROOT, "outputs", "tmp", "phase5a");
 
 const failures = [];
 let outputDocx = null;
 
-await runCheck("golden Unitas document-set renders to DRAFT DOCX", async () => {
+await runCheck("golden Sample document-set renders to DRAFT DOCX", async () => {
   await rm(OUTPUT_DIR, { recursive: true, force: true });
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const outputFileName = buildOutputFileName(documentSet, { mode: "draft" });
   outputDocx = path.join(OUTPUT_DIR, outputFileName);
   const renderResult = await renderDraftDocx(documentSet, outputDocx, { filename: outputFileName });
@@ -38,21 +38,21 @@ await runCheck("golden Unitas document-set renders to DRAFT DOCX", async () => {
 });
 
 await runCheck("rendered DRAFT DOCX satisfies Phase 5A OOXML assertions", async () => {
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const assertionReport = await assertPhase5aDocx(outputDocx, documentSet);
   assert.equal(assertionReport.status, "pass");
 });
 
 await runCheck("handoff manifest captures output provenance and preflight status", async () => {
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const manifestPath = path.join(OUTPUT_DIR, buildManifestFileName(path.basename(outputDocx)));
   const manifest = await buildHandoffManifest(documentSet, {
     generatedAt: "2026-06-27T00:00:00.000Z",
     mode: "draft",
     outputPath: outputDocx,
-    documentSetPath: UNITAS_DOCUMENT_SET,
+    documentSetPath: SAMPLE_DOCUMENT_SET,
     recipients: ["[Client To Confirm]"],
-    subject: "Safe Method Risk Register DRAFT handoff - PROJ-RA-UNITAS-REV04",
+    subject: "Safe Method Risk Register DRAFT handoff - PROJ-RA-SAMPLE-REV04",
     verifierStatus: [
       {
         id: "phase5a-docx-ooxml",

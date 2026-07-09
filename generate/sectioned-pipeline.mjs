@@ -24,8 +24,8 @@ import {
 } from "../scripts/kb-source.mjs";
 
 export const SECTIONED_GENERATION_PIPELINE_VERSION = "phase4.sectioned-generation.v1";
-export const DEFAULT_SECTIONED_UNITAS_DOCUMENT_SET_PATH =
-  "fixtures/golden/document-sets/unitas-document-set.json";
+export const DEFAULT_SECTIONED_SAMPLE_DOCUMENT_SET_PATH =
+  "fixtures/golden/document-sets/sample-document-set.json";
 export const SUPPORT_BUNDLE_SECTION = "support_bundle";
 export const RISK_REGISTER_CHUNK_SECTIONS = Object.freeze([
   "risk_register_part_1",
@@ -595,12 +595,12 @@ export function assembleSectionedDocumentSet({ normalisedBrief, retrievalPacket,
 
 export function createSectionedFixtureProvider(options = {}) {
   const root = options.root ?? REPO_ROOT;
-  const fixturePath = options.fixturePath ?? DEFAULT_SECTIONED_UNITAS_DOCUMENT_SET_PATH;
+  const fixturePath = options.fixturePath ?? DEFAULT_SECTIONED_SAMPLE_DOCUMENT_SET_PATH;
   let fixturePromise = null;
 
   return {
     provider_name: "sectioned-fixture",
-    model: options.model ?? "fixture:unitas-golden-sectioned-document-set",
+    model: options.model ?? "fixture:sample-golden-sectioned-document-set",
     async generate({ sectionName }) {
       fixturePromise ??= readJson(root, fixturePath);
       const documentSet = await fixturePromise;

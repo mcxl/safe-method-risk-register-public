@@ -22,26 +22,26 @@ import {
   REPO_ROOT,
 } from "../../scripts/kb-source.mjs";
 
-export const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
-export const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+export const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
+export const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 export const TEST_RUN_ROOT = path.join(REPO_ROOT, "outputs", "tmp", "codex-assisted", "tests");
 
-export async function buildUnitasContext() {
+export async function buildSampleContext() {
   const snapshot = await buildKnowledgeSnapshot(REPO_ROOT);
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { root: REPO_ROOT, snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { root: REPO_ROOT, snapshot });
   const normalisedBrief = await normaliseProjectBrief(brief, { root: REPO_ROOT, snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalisedBrief, {
     root: REPO_ROOT,
     snapshot,
   });
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   return {
     snapshot,
     brief,
     normalisedBrief,
     retrievalPacket,
     golden,
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
   };
 }
 

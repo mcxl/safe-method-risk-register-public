@@ -5,7 +5,7 @@ import { REPO_ROOT } from "./kb-source.mjs";
 import {
   cleanDirectory,
   recalculateWithLibreOffice,
-  renderUnitasXlsx,
+  renderSampleXlsx,
 } from "./xlsx-verification-utils.mjs";
 
 const OUTPUT_DIR = path.join(REPO_ROOT, "outputs", "tmp", "phase5b-dashboard");
@@ -18,7 +18,7 @@ const PYTHON =
     : path.join(REPO_ROOT, ".venv", "bin", "python"));
 
 await cleanDirectory(OUTPUT_DIR);
-const { outputXlsx } = await renderUnitasXlsx(OUTPUT_DIR);
+const { outputXlsx } = await renderSampleXlsx(OUTPUT_DIR);
 runPython(["scripts/verify_xlsx_dashboard_scenarios.py", "--workbook", outputXlsx, "--mutate"]);
 const recalc = await recalculateWithLibreOffice(outputXlsx, RECALC_DIR, PROFILE_DIR);
 const result = runPython([

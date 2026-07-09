@@ -18,7 +18,7 @@ if (
     `Golden document set expected Benchmark Quality Confirmed, got ${goldenReport.status} ${goldenReport.verdict.rating}`,
   );
 } else {
-  console.log("PASS golden Unitas set: Benchmark Quality Confirmed");
+  console.log("PASS golden Sample set: Benchmark Quality Confirmed");
 }
 
 const { sourceDocumentSet, cases } = loadPhase3Cases();

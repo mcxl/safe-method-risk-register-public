@@ -10,12 +10,12 @@ import { RenderValidationError } from "../render/docx-renderer.mjs";
 import { assertPhase5bXlsx, renderDraftXlsx } from "../render/xlsx-renderer.mjs";
 import { canonicalClone, readJson, REPO_ROOT } from "../scripts/kb-source.mjs";
 
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
 test("Phase 5B renders a validated golden document-set as DRAFT XLSX", async () => {
   const tempDir = await mkdtemp(path.join(tmpdir(), "safe-method-xlsx-"));
   try {
-    const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const outputFileName = buildOutputFileName(documentSet, {
       mode: "draft",
       extension: "xlsx",
@@ -27,7 +27,7 @@ test("Phase 5B renders a validated golden document-set as DRAFT XLSX", async () 
 
     assert.equal(renderResult.workflow_state, "DRAFT");
     assert.equal(renderResult.issue_ready, false);
-    assert.equal(renderResult.filename, "proj-ra-unitas-rev04-draft-whs-control-document-set.xlsx");
+    assert.equal(renderResult.filename, "proj-ra-sample-rev04-draft-whs-control-document-set.xlsx");
     assert.match(renderResult.output_hash_sha256, /^[a-f0-9]{64}$/u);
     assert.equal(existsSync(outputPath), true);
 
@@ -41,7 +41,7 @@ test("Phase 5B renders a validated golden document-set as DRAFT XLSX", async () 
 test("Phase 5B blocks schema-invalid document-sets before writing XLSX", async () => {
   const tempDir = await mkdtemp(path.join(tmpdir(), "safe-method-xlsx-invalid-"));
   try {
-    const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const invalid = canonicalClone(documentSet);
     delete invalid.hrcw_register;
     const outputPath = path.join(tempDir, "invalid.xlsx");
@@ -60,7 +60,7 @@ test("Phase 5B blocks schema-invalid document-sets before writing XLSX", async (
 test("Phase 5B blocks rule-failing document-sets before writing XLSX", async () => {
   const tempDir = await mkdtemp(path.join(tmpdir(), "safe-method-xlsx-rule-"));
   try {
-    const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const invalid = canonicalClone(documentSet);
     invalid.swms_matrix[0].reviewed_by = "SWMS approval by principal contractor";
     const outputPath = path.join(tempDir, "rule-invalid.xlsx");

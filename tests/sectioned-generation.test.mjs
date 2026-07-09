@@ -22,13 +22,13 @@ import {
   REPO_ROOT,
 } from "../scripts/kb-source.mjs";
 
-const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
 test("sectioned fixture provider assembles sections into a validated DRAFT document set", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createSectionedFixtureProvider(),
     maxRetries: 0,
   });
@@ -87,7 +87,7 @@ test("SWMS benchmark review chunk schemas are strict chunk envelopes", () => {
 });
 
 test("risk register chunks assemble to the exact golden risk register", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const rows = [];
 
   for (const sectionName of RISK_REGISTER_CHUNK_SECTIONS) {
@@ -101,7 +101,7 @@ test("risk register chunks assemble to the exact golden risk register", async ()
 });
 
 test("SWMS benchmark review chunks assemble to the exact golden reviews", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const rows = [];
 
   for (const sectionName of SWMS_BENCHMARK_REVIEW_CHUNK_SECTIONS) {
@@ -116,7 +116,7 @@ test("SWMS benchmark review chunks assemble to the exact golden reviews", async 
 
 test("section generation request uses section schema and omits local assembly fields", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   const request = await buildSectionGenerationRequest({
@@ -139,7 +139,7 @@ test("section generation request uses section schema and omits local assembly fi
 
 test("section generation request includes accepted prior sections as consistency context", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   const request = await buildSectionGenerationRequest({
@@ -177,7 +177,7 @@ test("section generation request includes accepted prior sections as consistency
 });
 
 test("risk chunk request includes non-empty source id contract on first pass", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "risk_register_part_4",
     normalisedBrief: normalised,
@@ -201,7 +201,7 @@ test("risk chunk request includes non-empty source id contract on first pass", a
 });
 
 test("risk chunk retry after empty source ids includes compact source catalogue", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "risk_register_part_4",
     normalisedBrief: normalised,
@@ -233,7 +233,7 @@ test("risk chunk retry after empty source ids includes compact source catalogue"
 });
 
 test("risk chunk retry after missing source ids includes compact source catalogue", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "risk_register_part_2",
     normalisedBrief: normalised,
@@ -260,7 +260,7 @@ test("risk chunk retry after missing source ids includes compact source catalogu
 });
 
 test("non-risk section retry does not include risk source catalogue", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "swms_matrix",
     normalisedBrief: normalised,
@@ -286,7 +286,7 @@ test("non-risk section retry does not include risk source catalogue", async () =
 });
 
 test("assembled correction prompt includes CONTENT-001 wording repair guidance", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "support_bundle",
     normalisedBrief: normalised,
@@ -323,7 +323,7 @@ test("assembled correction prompt includes CONTENT-001 wording repair guidance",
 });
 
 test("assembled correction prompt includes targeted risk repair guidance", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "risk_register_part_1",
     normalisedBrief: normalised,
@@ -359,8 +359,8 @@ test("assembled correction prompt includes targeted risk repair guidance", async
 });
 
 test("RISK-007 correction prompt includes open access confirmation and target controls", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const riskEnvelope = buildSectionEnvelopeFromDocumentSet("risk_register_part_1", golden);
   const acceptedSections = {
     risk_register_part_1: invalidRisk007RiskEnvelope(accessConditionedRiskEnvelope(riskEnvelope))
@@ -404,7 +404,7 @@ test("RISK-007 correction prompt includes open access confirmation and target co
 });
 
 test("assembled correction prompt omits unrelated rule-specific guidance", async () => {
-  const { normalised, retrievalPacket } = await buildUnitasRequestContext();
+  const { normalised, retrievalPacket } = await buildSampleRequestContext();
   const request = await buildSectionGenerationRequest({
     sectionName: "swms_matrix",
     normalisedBrief: normalised,
@@ -433,9 +433,9 @@ test("assembled correction prompt omits unrelated rule-specific guidance", async
 });
 
 test("sectioned generation fails closed for wrong section responses", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: {
       provider_name: "wrong-section-fixture",
       model: "fixture:wrong-section",
@@ -458,7 +458,7 @@ test("sectioned generation fails closed for wrong section responses", async () =
 });
 
 test("support bundle legal references must match approved retrieval references", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = {
     provider_name: "legal-mismatch-fixture",
     model: "fixture:legal-mismatch",
@@ -473,7 +473,7 @@ test("support bundle legal references must match approved retrieval references",
   };
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
   });
@@ -484,10 +484,10 @@ test("support bundle legal references must match approved retrieval references",
 });
 
 test("sectionMaxRetries applies to risk chunks while preserving global retry default", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const riskRetryProvider = invalidRiskSourceIdsOnceProvider(golden);
   const riskRetryResult = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: riskRetryProvider,
     maxRetries: 0,
     sectionMaxRetries: {
@@ -511,7 +511,7 @@ test("sectionMaxRetries applies to risk chunks while preserving global retry def
   );
 
   const nonRiskResult = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: wrongHrcwOnceProvider(golden),
     maxRetries: 0,
     sectionMaxRetries: {
@@ -531,9 +531,9 @@ test("sectionMaxRetries applies to risk chunks while preserving global retry def
 });
 
 test("still schema-invalid risk source id retry fails closed before assembly", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: alwaysInvalidRiskSourceIdsProvider(golden),
     maxRetries: 0,
     sectionMaxRetries: {
@@ -560,13 +560,13 @@ test("still schema-invalid risk source id retry fails closed before assembly", a
 });
 
 test("assembled rule failure triggers only mapped section correction", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = supportBundleCorrectionProvider(golden, {
     correctionMode: "golden",
   });
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,
@@ -585,11 +585,11 @@ test("assembled rule failure triggers only mapped section correction", async () 
 });
 
 test("targeted live rule feedback corrections reassemble to validation pass", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = liveRuleFeedbackCorrectionProvider(golden);
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,
@@ -610,11 +610,11 @@ test("targeted live rule feedback corrections reassemble to validation pass", as
 });
 
 test("isolated RISK-007 correction targets owning risk chunk and preserves open confirmation", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const provider = isolatedRisk007CorrectionProvider(golden);
 
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider,
     maxRetries: 0,
     maxAssemblyCorrections: 1,
@@ -642,9 +642,9 @@ test("isolated RISK-007 correction targets owning risk chunk and preserves open 
 });
 
 test("maxAssemblyCorrections 0 preserves isolated RISK-007 fail-closed behavior", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: isolatedRisk007CorrectionProvider(golden),
     maxRetries: 0,
     maxAssemblyCorrections: 0,
@@ -663,9 +663,9 @@ test("maxAssemblyCorrections 0 preserves isolated RISK-007 fail-closed behavior"
 });
 
 test("maxAssemblyCorrections 0 preserves assembled rule failure", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: supportBundleCorrectionProvider(golden, {
       correctionMode: "golden",
     }),
@@ -682,9 +682,9 @@ test("maxAssemblyCorrections 0 preserves assembled rule failure", async () => {
 });
 
 test("malformed assembly correction response fails closed with section evidence", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: supportBundleCorrectionProvider(golden, {
       correctionMode: "malformed",
     }),
@@ -701,9 +701,9 @@ test("malformed assembly correction response fails closed with section evidence"
 });
 
 test("assembly correction bound is respected when rule failures remain", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: supportBundleCorrectionProvider(golden, {
       correctionMode: "still-invalid",
     }),
@@ -825,7 +825,7 @@ test("assembly correction plan routes support and special consistency failures",
 });
 
 test("Anthropic-style section text responses parse as section envelopes", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const envelope = buildSectionEnvelopeFromDocumentSet("swms_matrix", golden);
   const parsed = parseSectionProviderResponse({
     content: [
@@ -1024,9 +1024,9 @@ function rows(count) {
   return Array.from({ length: count }, (_, index) => ({ ref: `ROW-${index}` }));
 }
 
-async function buildUnitasRequestContext() {
+async function buildSampleRequestContext() {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   return { snapshot, brief, normalised, retrievalPacket };

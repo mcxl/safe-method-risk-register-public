@@ -12,7 +12,7 @@ import {
 } from "../rules/phase3-fixtures.mjs";
 import { validateDocumentSet } from "../rules/index.mjs";
 
-test("golden Unitas document set passes deterministic rules", () => {
+test("golden Sample document set passes deterministic rules", () => {
   const report = goldenRuleReport();
   assert.equal(report.status, "pass");
   assert.deepEqual(report.results, []);

@@ -8,11 +8,11 @@ import { buildOutputFileName } from "../app/handoff-manifest.mjs";
 import { renderDraftXlsx } from "../render/xlsx-renderer.mjs";
 import { readJson, REPO_ROOT } from "./kb-source.mjs";
 
-export const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+export const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
-export async function renderUnitasXlsx(outputDir) {
+export async function renderSampleXlsx(outputDir) {
   await mkdir(outputDir, { recursive: true });
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const outputFileName = buildOutputFileName(documentSet, { mode: "draft", extension: "xlsx" });
   const outputXlsx = path.join(outputDir, outputFileName);
   const renderResult = await renderDraftXlsx(documentSet, outputXlsx, {

@@ -5,11 +5,11 @@ import {
   runSectionedGenerationPipeline,
 } from "../generate/sectioned-pipeline.mjs";
 
-export const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
+export const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
 
 export async function runSectionedApiSmoke({ label, provider }) {
   const result = await runSectionedGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createLoggingProvider(provider),
     maxRetries: 1,
     sectionMaxRetries: Object.fromEntries(

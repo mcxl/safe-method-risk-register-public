@@ -25,7 +25,7 @@ import {
   verifyLocalDraftArtifacts,
 } from "../scripts/verify-local-draft.mjs";
 import { canonicalClone, REPO_ROOT } from "../scripts/kb-source.mjs";
-import { buildUnitasContext } from "./helpers/codex-assisted-runs.mjs";
+import { buildSampleContext } from "./helpers/codex-assisted-runs.mjs";
 
 const LOCAL_DRAFT_TEST_ROOT = path.join(REPO_ROOT, "outputs", "tmp", "local-draft-tests");
 
@@ -79,7 +79,7 @@ test("local draft CLI parsing supports env fallbacks and explicit date stamps", 
 });
 
 test("local draft generation renders a DRAFT DOCX, manifest and verifier pass", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createLocalDraftRun("local-draft-pass", context);
   const outputDir = path.join(LOCAL_DRAFT_TEST_ROOT, "local-draft-pass-output");
 
@@ -113,7 +113,7 @@ test("local draft generation renders a DRAFT DOCX, manifest and verifier pass", 
 });
 
 test("local draft generation emits worker packets and does not render when sections are missing", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const runDirectory = path.join(LOCAL_DRAFT_TEST_ROOT, "local-draft-missing-sections");
   await rm(runDirectory, { recursive: true, force: true });
 
@@ -139,7 +139,7 @@ test("local draft generation emits worker packets and does not render when secti
 });
 
 test("local draft generation fails closed on lock and assembly failures", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const invalidEnvelope = canonicalClone(
     buildSectionEnvelopeFromDocumentSet("hrcw_register", context.golden),
   );
@@ -200,7 +200,7 @@ test("local draft generation fails closed on lock and assembly failures", async 
 });
 
 test("local draft verifier detects output, naming, hash and issue-ready failures", async () => {
-  const context = await buildUnitasContext();
+  const context = await buildSampleContext();
   const run = await createLocalDraftRun("local-draft-verifier", context);
   const outcome = await runLocalDraftGeneration({
     root: REPO_ROOT,

@@ -1,7 +1,7 @@
 import { createAnthropicProvider, runGenerationPipeline } from "../generate/pipeline.mjs";
 import { buildDocumentSetSmokeOutputSchema } from "../generate/schema-bundle.mjs";
 
-const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
+const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
 
 if (!process.env.ANTHROPIC_API_KEY) {
   console.log("SKIP Phase 4 Anthropic API smoke: ANTHROPIC_API_KEY is not set.");
@@ -24,7 +24,7 @@ if (!["smoke", "full"].includes(schemaMode)) {
 }
 
 const result = await runGenerationPipeline({
-  briefPath: UNITAS_BRIEF,
+  briefPath: SAMPLE_BRIEF,
   provider: createAnthropicProvider(),
   maxRetries: 1,
   outputSchema: schemaMode === "smoke" ? buildDocumentSetSmokeOutputSchema() : undefined,

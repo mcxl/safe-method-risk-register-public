@@ -61,7 +61,7 @@ const checks = [
     label: "Phase 5B blocker evidence",
     test: () =>
       has(
-        /fixtures\/golden\/briefs\/rpd-rev02-project-brief\.json|rpd-rev02-canonical-project-brief/u,
+        /fixtures\/golden\/briefs\/private-benchmark-project-brief\.json|private-benchmark-canonical-project-brief/u,
       ),
   },
 ];

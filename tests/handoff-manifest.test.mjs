@@ -14,32 +14,32 @@ import {
 import { createAjvRegistry, formatAjvErrors } from "../scripts/schema-registry.mjs";
 import { canonicalClone, readJson, REPO_ROOT } from "../scripts/kb-source.mjs";
 
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
 
 test("handoff output naming is deterministic and date stamps are explicit", async () => {
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
 
   assert.equal(
     buildOutputFileName(documentSet, { mode: "draft" }),
-    "proj-ra-unitas-rev04-draft-whs-control-document-set.docx",
+    "proj-ra-sample-rev04-draft-whs-control-document-set.docx",
   );
   assert.equal(
     buildOutputFileName(documentSet, { mode: "final", dateStamp: "from_issue_date" }),
-    "proj-ra-unitas-rev04-2026-03-24-final-whs-control-document-set.docx",
+    "proj-ra-sample-rev04-2026-03-24-final-whs-control-document-set.docx",
   );
   assert.deepEqual(resolveDateStamp(documentSet, false), { source: "omitted", value: null });
   assert.equal(normaliseDateStamp("2026-03-24"), "2026-03-24");
   assert.throws(() => normaliseDateStamp("[Client To Confirm]"), /concrete date/u);
   assert.equal(
     buildOutputFileName(documentSet, { mode: "draft", extension: "xlsx" }),
-    "proj-ra-unitas-rev04-draft-whs-control-document-set.xlsx",
+    "proj-ra-sample-rev04-draft-whs-control-document-set.xlsx",
   );
 });
 
 test("draft handoff manifest validates and remains not issue-ready", async () => {
   const tempDir = await mkdtemp(path.join(tmpdir(), "safe-method-manifest-"));
   try {
-    const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const outputFileName = buildOutputFileName(documentSet, { mode: "draft" });
     const outputPath = path.join(tempDir, outputFileName);
     await writeFile(outputPath, "draft output bytes");
@@ -48,7 +48,7 @@ test("draft handoff manifest validates and remains not issue-ready", async () =>
       generatedAt: "2026-06-27T00:00:00.000Z",
       mode: "draft",
       outputPath,
-      documentSetPath: UNITAS_DOCUMENT_SET,
+      documentSetPath: SAMPLE_DOCUMENT_SET,
       recipients: ["[Client To Confirm]"],
       verifierStatus: [
         {
@@ -87,7 +87,7 @@ test("draft handoff manifest validates and remains not issue-ready", async () =>
 test("final handoff is blocked without sign-off, gates and required verifier pass", async () => {
   const tempDir = await mkdtemp(path.join(tmpdir(), "safe-method-final-manifest-"));
   try {
-    const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+    const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
     const outputFileName = buildOutputFileName(documentSet, {
       mode: "final",
       dateStamp: "from_issue_date",
@@ -100,7 +100,7 @@ test("final handoff is blocked without sign-off, gates and required verifier pas
       mode: "final",
       dateStamp: "from_issue_date",
       outputPath,
-      documentSetPath: UNITAS_DOCUMENT_SET,
+      documentSetPath: SAMPLE_DOCUMENT_SET,
       verifierStatus: [
         {
           id: "phase5a-docx-ooxml",
@@ -132,7 +132,7 @@ test("final handoff is blocked without sign-off, gates and required verifier pas
 });
 
 test("unresolved placeholder counts are reported without mutating WHS content", async () => {
-  const documentSet = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const documentSet = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const withPlaceholder = canonicalClone(documentSet);
   withPlaceholder.project.whs_consultant = "[Client To Confirm]";
   withPlaceholder.project.review_date = "[Client To Confirm]";

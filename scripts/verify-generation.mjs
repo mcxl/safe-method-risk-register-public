@@ -13,17 +13,17 @@ import {
 } from "../generate/pipeline.mjs";
 import { buildKnowledgeSnapshot, canonicalClone, readJson, REPO_ROOT } from "./kb-source.mjs";
 
-const UNITAS_BRIEF = "fixtures/golden/briefs/unitas-project-brief.json";
-const UNITAS_DOCUMENT_SET = "fixtures/golden/document-sets/unitas-document-set.json";
-const CONDITIONAL_RISK_BRIEF = "fixtures/golden/briefs/conditional-risk-project-brief.json";
-const CONDITIONAL_RISK_DOCUMENT_SET =
-  "fixtures/golden/document-sets/conditional-risk-document-set.json";
+const SAMPLE_BRIEF = "fixtures/golden/briefs/sample-project-brief.json";
+const SAMPLE_DOCUMENT_SET = "fixtures/golden/document-sets/sample-document-set.json";
+const CONDITIONAL_SAMPLE_BRIEF = "fixtures/golden/briefs/conditional-sample-project-brief.json";
+const CONDITIONAL_SAMPLE_DOCUMENT_SET =
+  "fixtures/golden/document-sets/conditional-sample-document-set.json";
 
 const failures = [];
 
-await runCheck("Unitas project brief validates and package aliases normalise", async () => {
+await runCheck("Sample project brief validates and package aliases normalise", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   assert.equal(normalised.project.trade_packages.length, 20);
   assert.equal(
@@ -34,7 +34,7 @@ await runCheck("Unitas project brief validates and package aliases normalise", a
 
 await runCheck("retrieval packet matches golden HRCW/control/hold-point expectations", async () => {
   const snapshot = await buildKnowledgeSnapshot();
-  const brief = await loadProjectBrief(UNITAS_BRIEF, { snapshot });
+  const brief = await loadProjectBrief(SAMPLE_BRIEF, { snapshot });
   const normalised = await normaliseProjectBrief(brief, { snapshot });
   const retrievalPacket = await buildRetrievalPacket(normalised, { snapshot });
   assertRetrievalMatchesFixtureExpectations(brief, retrievalPacket);
@@ -42,7 +42,7 @@ await runCheck("retrieval packet matches golden HRCW/control/hold-point expectat
 
 await runCheck("fixture-backed generation passes schema and deterministic rules", async () => {
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createFixtureProvider(),
     maxRetries: 0,
   });
@@ -55,11 +55,11 @@ await runCheck("fixture-backed generation passes schema and deterministic rules"
 });
 
 await runCheck(
-  "conditional-risk synthetic fixture keeps unconfirmed HRCW conditional",
+  "Conditional Sample synthetic fixture keeps unconfirmed HRCW conditional",
   async () => {
     const result = await runGenerationPipeline({
-      briefPath: CONDITIONAL_RISK_BRIEF,
-      provider: createFixtureProvider({ fixturePath: CONDITIONAL_RISK_DOCUMENT_SET }),
+      briefPath: CONDITIONAL_SAMPLE_BRIEF,
+      provider: createFixtureProvider({ fixturePath: CONDITIONAL_SAMPLE_DOCUMENT_SET }),
       maxRetries: 0,
     });
 
@@ -75,12 +75,12 @@ await runCheck(
 );
 
 await runCheck("schema-invalid structured response is corrected within bounded retry", async () => {
-  const golden = await readJson(REPO_ROOT, UNITAS_DOCUMENT_SET);
+  const golden = await readJson(REPO_ROOT, SAMPLE_DOCUMENT_SET);
   const invalid = canonicalClone(golden);
   delete invalid.hrcw_register;
 
   const result = await runGenerationPipeline({
-    briefPath: UNITAS_BRIEF,
+    briefPath: SAMPLE_BRIEF,
     provider: createSequenceProvider([invalid, golden]),
     maxRetries: 1,
   });

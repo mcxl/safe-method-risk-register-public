@@ -1192,7 +1192,7 @@ function titleTokenOverlap(left, right) {
 function mentionsProject(evidence, projectName) {
   const text = evidence ?? "";
   if (!nonEmpty(text)) return false;
-  if (/approved rev04|unitas business park|project/i.test(text)) return true;
+  if (/approved rev04|sample business park|project/i.test(text)) return true;
   const firstProjectWord = (projectName ?? "").split(/\s+/)[0];
   return firstProjectWord.length > 2 && text.toLowerCase().includes(firstProjectWord.toLowerCase());
 }

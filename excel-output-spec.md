@@ -4,10 +4,11 @@
 primary deliverable remains the combined .docx. When Excel *is* requested, it must
 follow this spec in full — it is not a by-product of the Word renderer.
 
-Before building in the private repository, inspect the approved private workbook golden
-fixture for exact fills, column widths and print setup, and mirror it. The private
-Master Project Register fixture is the golden example of this spec realised (five
-visible business sheets plus hidden `Lists`, ~126 live formulas, zero errors).
+Before building, inspect the approved `private-risk-assessment-golden.xlsx` golden fixture
+for exact fills, column widths and print setup, and mirror it. The
+**Master Project Register** (`private-master-project-register.xlsx`) fixture is
+the golden example of this spec realised (five visible business sheets plus hidden
+`Lists`, ~126 live formulas, zero errors).
 
 ---
 
@@ -41,7 +42,7 @@ the workbook.
    rating text) and Risk Reduction (= Initial − Residual).
 
 Future tabs flagged for a later iteration (do not build unless requested): **SWMS Matrix**
-tab and **Risk Matrix** tab, to fully mirror the private master workbook.
+tab and **Risk Matrix** tab, to fully mirror the Sample master workbook.
 
 ## The workbook must be live, not static
 
@@ -68,10 +69,9 @@ the scores. No WHS logic lives in the renderer.
 
 - All formulas evaluate with **zero errors**; dropdowns functional; changing a rating
   recalculates the score columns and Dashboard.
-- House style matches the private benchmark workbook (navy headers, traffic-light shading, trigger
+- House style matches the Sample xlsx (navy headers, traffic-light shading, trigger
   colours, thin borders).
 - A4 landscape, fit-to-width, footer with filename + page numbers on every sheet.
-- Golden check: regenerating the private benchmark brief reproduces the Master Project
-  Register.
+- Golden check: regenerating the Private Benchmark brief reproduces the Master Project Register.
 - Same DRAFT gate as docx — Excel is a generation output requiring consultant review
   before issue.

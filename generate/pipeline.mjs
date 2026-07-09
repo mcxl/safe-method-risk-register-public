@@ -23,8 +23,8 @@ export const GENERATION_PIPELINE_VERSION = "phase4.generation.v1";
 export const PROMPT_VERSION = "phase4.prompt-system.v1";
 export const DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-4-6";
 export const DEFAULT_PROMPT_PATH = "spec/30-prompt-system.md";
-export const DEFAULT_UNITAS_DOCUMENT_SET_PATH =
-  "fixtures/golden/document-sets/unitas-document-set.json";
+export const DEFAULT_SAMPLE_DOCUMENT_SET_PATH =
+  "fixtures/golden/document-sets/sample-document-set.json";
 
 export async function runGenerationPipeline(options = {}) {
   const root = options.root ?? REPO_ROOT;
@@ -216,11 +216,11 @@ export function parseProviderResponse(response) {
 
 export function createFixtureProvider(options = {}) {
   const root = options.root ?? REPO_ROOT;
-  const fixturePath = options.fixturePath ?? DEFAULT_UNITAS_DOCUMENT_SET_PATH;
+  const fixturePath = options.fixturePath ?? DEFAULT_SAMPLE_DOCUMENT_SET_PATH;
 
   return {
     provider_name: "fixture",
-    model: options.model ?? "fixture:unitas-golden-document-set",
+    model: options.model ?? "fixture:sample-golden-document-set",
     async generate() {
       return readJson(root, fixturePath);
     },
